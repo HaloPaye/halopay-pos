@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Delete } from 'lucide-react';
+import SpecularButton from './SpecularButton';
 
 interface KeypadProps {
   onKeyPress: (key: string) => void;
@@ -71,13 +72,13 @@ export const Keypad: React.FC<KeypadProps> = ({
         >
           <Delete className="w-6 h-6" />
         </button>
-        <button
+        <SpecularButton
           disabled={disabled || !canCharge}
           onClick={() => { triggerHaptic(); onCharge(); }}
-          className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl transition-all shadow-md active:bg-blue-800 disabled:opacity-50 disabled:shadow-none"
+          className="h-16 flex-1 !text-xl"
         >
           Charge
-        </button>
+        </SpecularButton>
       </div>
     </div>
   );
