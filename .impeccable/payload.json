@@ -1,0 +1,35 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned The Rugged Handheld Scanner. Keep it, or take the standard canon exit.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Rugged Handheld Scanner",
+      "kicker": "THE ROLL",
+      "lineage": "Industrial warehouse barcode scanners and inventory terminals",
+      "thesis": "High-visibility, unbreakable hardware interface for the physical world.",
+      "palette": [
+        "#111111",
+        "#FF5E00",
+        "#F3F4F6",
+        "#374151"
+      ],
+      "materials": [
+        "rubberized borders",
+        "stark LED high-contrast"
+      ],
+      "viewport": "A massive, full-width numeric keypad dominates, with a high-visibility LED-style fiat display.",
+      "risk": "Can feel overly utilitarian or aggressive if the typography isn't polished.",
+      "sketch": ".impeccable/sketches/assigned.png"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "What this category ships, executed impeccably.",
+    "viewport": "A standard, clean web app layout with floating white cards and faint grey text.",
+    "sketch": ".impeccable/sketches/canon.png"
+  },
+  "steer": true
+}

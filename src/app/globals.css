@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 248, 250, 252; /* slate-50 */
-  --background-rgb: 2, 6, 23; /* slate-950 */
+  --foreground-rgb: 17, 24, 39;
+  --background-rgb: 249, 250, 251;
 }
 
 body {
@@ -15,36 +15,24 @@ body {
   overflow-x: hidden;
 }
 
-/* Pristine Fintech Glassmorphism helpers */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.8); /* slate-900/80 */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid #1e293b; /* slate-800 */
+/* Minimalist container helpers */
+.panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-.glass-card {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #1e293b;
-}
-
-/* Custom sleek scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #020617; /* slate-950 */
+  background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #334155; /* slate-700 */
+  background: #cbd5e1;
   border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #34d399; /* emerald-400 */
+  background: #94a3b8;
 }
