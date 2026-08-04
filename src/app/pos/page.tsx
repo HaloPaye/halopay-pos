@@ -156,7 +156,7 @@ export default function POSPage() {
           >
             <History className="w-5 h-5" />
             {history.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center border border-white">
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center border border-white">
                 {history.length}
               </span>
             )}

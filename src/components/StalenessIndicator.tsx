@@ -30,7 +30,7 @@ export const StalenessIndicator: React.FC<StalenessIndicatorProps> = ({
           <span className="text-sm font-semibold text-gray-900">
             1 USDC = {rate.toLocaleString()} {currency}
           </span>
-          <span className="text-[10px] font-bold uppercase tracking-wide bg-gray-100 text-gray-500 px-2 py-0.5 rounded">
+          <span className="text-xs font-bold uppercase tracking-wide bg-gray-100 text-gray-500 px-2 py-0.5 rounded">
             {source}
           </span>
         </div>
