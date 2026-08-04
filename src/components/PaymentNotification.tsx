@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { CheckCircle, Zap, WifiOff, X } from 'lucide-react';
+import { CheckCircle, X } from 'lucide-react';
 import { TransactionRecord } from '@/lib/storage';
 
 interface PaymentNotificationProps {
@@ -17,7 +17,6 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
   activeTransaction,
   onPaymentConfirmed,
 }) => {
-  const [isConnected, setIsConnected] = useState(false);
   const [confirmedTx, setConfirmedTx] = useState<{ tx: TransactionRecord; txHash: string } | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -34,7 +33,6 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
 
         ws.onopen = () => {
           if (!isMounted) return;
-          setIsConnected(true);
           console.log('[HaloPay POS] WebSocket payment listener connected:', wsUrl);
           // Subscribe to merchant public key events
           ws.send(JSON.stringify({ type: 'subscribe', address: publicKey }));
@@ -52,7 +50,7 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
               if (activeTransaction && activeTransaction.memo === memo) {
                 // Play notification audio sound simulation
                 if ('vibrate' in navigator) {
-                  try { navigator.vibrate([100, 50, 100, 50, 200]); } catch {}
+                  try { navigator.vibrate([100, 50, 100, 50, 200]); } catch (e) { /* ignore */ }
                 }
                 setConfirmedTx({ tx: activeTransaction, txHash });
                 onPaymentConfirmed(activeTransaction, txHash);
@@ -65,17 +63,15 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
 
         ws.onclose = () => {
           if (!isMounted) return;
-          setIsConnected(false);
           // Attempt silent reconnect after 4 seconds
           reconnectTimer = setTimeout(connect, 4000);
         };
 
         ws.onerror = () => {
           if (!isMounted) return;
-          setIsConnected(false);
         };
       } catch {
-        setIsConnected(false);
+        // failed to connect
       }
     };
 

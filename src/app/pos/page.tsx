@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Settings, ShieldCheck, History, ArrowUpRight, Zap, RefreshCw, CreditCard, Sparkles } from 'lucide-react';
+import { Settings, History, Zap, RefreshCw, Sparkles } from 'lucide-react';
 import {
   getMerchantConfig,
   getTransactionHistory,
