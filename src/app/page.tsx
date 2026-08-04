@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
 import { ArrowRight, Globe2, ShieldCheck, Smartphone, WifiOff, FileCheck, Landmark, HelpCircle, Rocket } from 'lucide-react';
+import FAQ from '@/components/FAQ';
+import CtaSection from '@/components/CtaSection';
+import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
+import SpecularButton from '@/components/SpecularButton';
 
 export default function LandingPage() {
   return (
@@ -16,13 +20,14 @@ export default function LandingPage() {
             <Link href="/pos" className="text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors">
               POS Terminal
             </Link>
-            <a 
-              href="https://github.com/HaloPaye/halopay-pos" 
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
-              target="_blank" rel="noreferrer"
+            <SpecularButton
+              as="a"
+              href="https://github.com/HaloPaye/halopay-pos"
+              className="!px-5 !py-2.5 !text-sm"
+              size="sm"
             >
               View GitHub
-            </a>
+            </SpecularButton>
           </div>
         </div>
       </nav>
@@ -41,20 +46,28 @@ export default function LandingPage() {
               HaloPaye provides true "no-rail" crisis zones with merchant-side POS systems, allowing local vendors to natively accept digital aid (USDC) and receive compliant settlement via MoneyGram.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link 
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <SpecularButton 
+                as={Link}
                 href="/pos" 
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all hover:-translate-y-0.5 shadow-md min-w-[240px]"
+                size="lg"
+                className="w-full sm:w-auto min-w-[240px]"
               >
                 Launch POS Terminal
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <a 
+              </SpecularButton>
+              <SpecularButton 
+                as="a"
                 href="#how-it-works" 
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-200 rounded-xl transition-all min-w-[240px]"
+                size="lg"
+                tint="#ffffff"
+                textColor="#111827"
+                baseColor="#e5e7eb"
+                lineColor="#2563eb"
+                className="w-full sm:w-auto min-w-[240px]"
               >
                 Learn More
-              </a>
+              </SpecularButton>
             </div>
 
             {/* Abstracted Bridge Visual */}
@@ -173,31 +186,41 @@ export default function LandingPage() {
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">A secure, resilient pipeline designed strictly for legitimate merchants.</p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8">
-              <ProcessStep 
-                num="1" 
-                icon={<FileCheck className="w-6 h-6" />}
-                title="Compliant Onboarding"
-                desc="Merchants with valid government ID submit docs via halopay-api. Securely routed for standard 1–3 day SEP-12 KYC verification via MoneyGram."
-              />
-              <ProcessStep 
-                num="2"
-                icon={<Smartphone className="w-6 h-6" />}
-                title="Native USDC Acceptance"
-                desc="The PWA POS generates standard Stellar payment QR codes. Recipients pay instantly from their USDC Aid Assist balance."
-              />
-              <ProcessStep 
-                num="3"
-                icon={<WifiOff className="w-6 h-6" />}
-                title="Offline-Capable Pricing"
-                desc="Generate QR codes even offline using securely cached exchange rates. The UI surfaces a clear staleness indicator when connectivity is low."
-              />
-              <ProcessStep 
-                num="4"
-                icon={<Landmark className="w-6 h-6" />}
-                title="Automatic Settlement"
-                desc="halopay-api programmatically aggregates balances and initiates a daily SEP-24 withdrawal to the merchant's MoneyGram location."
-              />
+            <div className="w-full mx-auto relative mt-12 mb-32">
+              <ScrollStack useWindowScroll={true}>
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                  <ProcessStep 
+                    num="1" 
+                    icon={<FileCheck className="w-10 h-10" />}
+                    title="Compliant Onboarding"
+                    desc="Merchants with valid government ID submit docs via halopay-api. Securely routed for standard 1–3 day SEP-12 KYC verification via MoneyGram."
+                  />
+                </ScrollStackItem>
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                  <ProcessStep 
+                    num="2"
+                    icon={<Smartphone className="w-10 h-10" />}
+                    title="Native USDC Acceptance"
+                    desc="The PWA POS generates standard Stellar payment QR codes. Recipients pay instantly from their USDC Aid Assist balance."
+                  />
+                </ScrollStackItem>
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                  <ProcessStep 
+                    num="3"
+                    icon={<WifiOff className="w-10 h-10" />}
+                    title="Offline-Capable Pricing"
+                    desc="Generate QR codes even offline using securely cached exchange rates. The UI surfaces a clear staleness indicator when connectivity is low."
+                  />
+                </ScrollStackItem>
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                  <ProcessStep 
+                    num="4"
+                    icon={<Landmark className="w-10 h-10" />}
+                    title="Automatic Settlement"
+                    desc="halopay-api programmatically aggregates balances and initiates a daily SEP-24 withdrawal to the merchant's MoneyGram location."
+                  />
+                </ScrollStackItem>
+              </ScrollStack>
             </div>
           </div>
         </section>
@@ -292,65 +315,37 @@ export default function LandingPage() {
             </div>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="https://github.com/HaloPaye/halopay-pos" target="_blank" rel="noreferrer" className="px-6 py-3 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center">
+              <SpecularButton 
+                as="a"
+                href="https://github.com/HaloPaye/halopay-pos" 
+                size="md"
+                tint="#ffffff"
+                textColor="#111827"
+                baseColor="#374151"
+                lineColor="#3b82f6"
+              >
                 View POS Source <ArrowRight className="w-4 h-4 ml-2" />
-              </a>
-              <a href="https://github.com/HaloPaye/halopay-api" target="_blank" rel="noreferrer" className="px-6 py-3 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-colors flex items-center justify-center">
+              </SpecularButton>
+              <SpecularButton 
+                as="a"
+                href="https://github.com/HaloPaye/halopay-api" 
+                size="md"
+                tint="#ffffff"
+                textColor="#111827"
+                baseColor="#374151"
+                lineColor="#3b82f6"
+              >
                 View API Source <ArrowRight className="w-4 h-4 ml-2" />
-              </a>
+              </SpecularButton>
             </div>
           </div>
         </section>
 
         {/* Phase 3: FAQ */}
-        <section className="py-24 bg-white border-b border-gray-200">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-12 flex items-center gap-3">
-              <HelpCircle className="w-8 h-8 text-blue-600" />
-              Frequently Asked Questions
-            </h2>
-            
-            <div className="space-y-8">
-              <FaqItem 
-                q="What kind of ID is required to operate a terminal?"
-                a="Valid government documentation is strictly required. For the initial MVP and regulatory hygiene, undocumented merchants are out of scope. We utilize standard SEP-12 KYC protocols through MoneyGram."
-              />
-              <FaqItem 
-                q="How does the PWA work offline?"
-                a="The terminal uses a securely cached, last-known exchange rate. It surfaces a clear, visible staleness indicator to the merchant. An active connection is only required when pushing settled balances back to the halopay-api."
-              />
-              <FaqItem 
-                q="Which countries are currently supported?"
-                a="HaloPaye is designed to operate primarily in the major UNDP deployment zones (e.g., Haiti, Syria, Gambia), anchoring its settlement layer firmly to MoneyGram's globally compliant off-ramp network."
-              />
-            </div>
-          </div>
-        </section>
+        <FAQ />
 
         {/* Phase 4: Final CTA */}
-        <section className="py-32 bg-blue-600 text-white text-center px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
-              HaloPaye is not just a POS system; it's the vital bridge that scales humanitarian impact to the local level.
-            </h2>
-            <div className="mt-12 flex justify-center gap-4 flex-col sm:flex-row">
-              <Link 
-                href="/pos" 
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-white text-blue-600 rounded-xl hover:bg-gray-50 transition-transform hover:-translate-y-0.5 shadow-xl"
-              >
-                Launch Terminal
-                <Smartphone className="w-5 h-5 ml-2" />
-              </Link>
-              <a 
-                href="https://github.com/HaloPaye/halopay-pos" 
-                target="_blank" rel="noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-transform hover:-translate-y-0.5 shadow-xl border border-blue-500"
-              >
-                View Source Code
-              </a>
-            </div>
-          </div>
-        </section>
+        <CtaSection />
       </main>
 
       <footer className="bg-gray-900 py-12 text-center text-gray-500 text-sm border-t border-gray-800">
@@ -368,15 +363,15 @@ export default function LandingPage() {
 
 function ProcessStep({ num, title, desc, icon }: { num: string, title: string, desc: string, icon: React.ReactNode }) {
   return (
-    <div className="relative p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-blue-200 transition-colors">
-      <div className="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white font-black text-xl rounded-xl flex items-center justify-center shadow-md">
+    <div className="relative">
+      <div className="w-16 h-16 bg-blue-100 text-blue-600 font-black text-2xl rounded-2xl flex items-center justify-center mb-6">
         {num}
       </div>
-      <div className="mb-4 text-blue-600 mt-2">
+      <div className="mb-4 text-blue-600">
         {icon}
       </div>
-      <h3 className="font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
+      <h3 className="font-extrabold text-gray-900 mb-4 text-3xl">{title}</h3>
+      <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">{desc}</p>
     </div>
   );
 }
