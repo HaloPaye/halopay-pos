@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-04T14:12:11Z",
+  "title": "Design System: HaloPay POS",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Action Blue", "canonical": "#2563eb", "tonalRamp": ["#eff6ff", "#dbeafe", "#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8", "#1e40af", "#1e3a8a"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Terminal Background", "canonical": "#f9fafb", "tonalRamp": ["#ffffff", "#f9fafb", "#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563", "#374151", "#1f2937"] },
+      "neutral-surface": { "role": "neutral", "displayName": "Surface White", "canonical": "#ffffff", "tonalRamp": ["#ffffff", "#f9fafb", "#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563", "#374151", "#1f2937"] },
+      "neutral-text-primary": { "role": "neutral", "displayName": "Text Primary", "canonical": "#111827", "tonalRamp": ["#ffffff", "#f9fafb", "#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563", "#374151", "#1f2937", "#111827"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The primary charge amount. Designed to be readable at a glance from a distance." },
+      "body": { "displayName": "Body", "purpose": "Standard interface labels and settings." }
+    },
+    "shadows": [
+      { "name": "subtle-lift", "value": "0 1px 2px 0 rgba(0, 0, 0, 0.05)", "purpose": "Applied to keypad buttons to separate them from the background." },
+      { "name": "primary-glow", "value": "0 4px 6px -1px rgba(0, 0, 0, 0.1)", "purpose": "Applied exclusively to the primary Action button and slide-over panels." }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Keypad Button",
+      "kind": "button",
+      "refersTo": "button-keypad",
+      "description": "The primary numeric input keys.",
+      "html": "<button class=\"ds-btn-keypad\">7</button>",
+      "css": ".ds-btn-keypad { background: #ffffff; color: #111827; height: 64px; width: 100%; border-radius: 16px; font-weight: 600; font-size: 1.5rem; border: 1px solid #e5e7eb; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); cursor: pointer; transition: background-color 0.15s; } .ds-btn-keypad:active { background: #f3f4f6; }"
+    },
+    {
+      "name": "Charge Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action button to initiate payment.",
+      "html": "<button class=\"ds-btn-primary\">Charge</button>",
+      "css": ".ds-btn-primary { background: #2563eb; color: #ffffff; height: 64px; width: 100%; border-radius: 16px; font-weight: 700; font-size: 1.25rem; border: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); cursor: pointer; transition: all 0.15s; } .ds-btn-primary:active { background: #1d4ed8; } .ds-btn-primary:disabled { opacity: 0.5; box-shadow: none; cursor: not-allowed; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Category Standard (Canon Exit)",
+    "overview": "A clean, stark white, high-contrast interface designed to sit natively alongside Stripe Terminal and Square POS. The design discards earlier sci-fi or rugged tropes in favor of a purely functional, professional aesthetic. It relies on crisp typography, generous touch targets, and stark separation of planes (gray backgrounds vs. white interactive surfaces) rather than heavy borders or stylized effects.",
+    "keyCharacteristics": [
+      "High-contrast legibility for bright retail environments.",
+      "Large, reliable touch targets (16px radius minimum for primary actions).",
+      "Utilitarian hierarchy driven by weight and scale, not color.",
+      "Action-oriented accenting: color is reserved exclusively for the primary 'Charge' action and active states."
+    ],
+    "rules": [
+      { "name": "The Action Isolation Rule", "body": "The primary blue is used only for the terminal's main objective (charging/confirming) and active notification states. Never use it for decoration or secondary actions.", "section": "colors" },
+      { "name": "The Numeric Primacy Rule", "body": "The charge amount is always the largest element on the screen, rendered in Extra Bold, ensuring the merchant and customer are never in doubt of the transaction state.", "section": "typography" },
+      { "name": "The Flat Plane Rule", "body": "Depth is structural, not decorative. Use shadows only to indicate interactivity (buttons) or elevation over the primary canvas (bottom sheets/modals).", "section": "elevation" }
+    ],
+    "dos": [
+      "Do ensure all interactive touch targets are at least 48px high.",
+      "Do use the Action Blue solely for the terminal's primary intent.",
+      "Do maintain maximum contrast (gray-900 on white) for all monetary amounts."
+    ],
+    "donts": [
+      "Don't reintroduce dark mode. The application must remain light and legible in variable retail environments.",
+      "Don't use decorative gradients, glassmorphism, or heavy borders."
+    ]
+  }
+}

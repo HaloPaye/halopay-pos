@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Delete, RotateCcw } from 'lucide-react';
+import { Delete } from 'lucide-react';
 
 interface KeypadProps {
   onKeyPress: (key: string) => void;
@@ -22,95 +22,63 @@ export const Keypad: React.FC<KeypadProps> = ({
 }) => {
   const triggerHaptic = () => {
     if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      try {
-        navigator.vibrate(15);
-      } catch {
-        // Ignore haptic errors if not supported
-      }
+      try { navigator.vibrate(10); } catch { /* ignore */ }
     }
-  };
-
-  const handleKey = (val: string) => {
-    if (disabled) return;
-    triggerHaptic();
-    onKeyPress(val);
-  };
-
-  const handleClear = () => {
-    if (disabled) return;
-    triggerHaptic();
-    onClear();
-  };
-
-  const handleBackspace = () => {
-    if (disabled) return;
-    triggerHaptic();
-    onBackspace();
   };
 
   const keys = [
     ['1', '2', '3'],
     ['4', '5', '6'],
     ['7', '8', '9'],
-    ['.', '0', '00'],
+    ['.', '0', 'clear'],
   ];
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col gap-3 p-2 select-none">
-      {/* Keypad Grid */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-3">
-        {keys.flat().map((keyVal) => (
-          <button
-            key={keyVal}
-            type="button"
-            disabled={disabled}
-            onClick={() => handleKey(keyVal)}
-            className="h-16 sm:h-20 rounded-2xl bg-slate-900/80 hover:bg-slate-800 active:bg-emerald-500/20 text-slate-100 active:text-emerald-400 font-bold text-2xl sm:text-3xl transition-all duration-150 shadow-md border border-slate-800/80 active:scale-95 flex items-center justify-center disabled:opacity-50"
-            aria-label={`Key ${keyVal}`}
-          >
-            {keyVal}
-          </button>
-        ))}
+    <div className="w-full max-w-sm mx-auto flex flex-col gap-3">
+      {/* Numpad */}
+      <div className="grid grid-cols-3 gap-3">
+        {keys.flat().map((keyVal) => {
+          if (keyVal === 'clear') {
+            return (
+              <button
+                key={keyVal}
+                disabled={disabled}
+                onClick={() => { triggerHaptic(); onClear(); }}
+                className="h-16 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold text-lg transition-colors flex items-center justify-center active:bg-gray-300"
+              >
+                Clear
+              </button>
+            );
+          }
+          return (
+            <button
+              key={keyVal}
+              disabled={disabled}
+              onClick={() => { triggerHaptic(); onKeyPress(keyVal); }}
+              className="h-16 rounded-2xl bg-white border border-gray-200 shadow-sm hover:bg-gray-50 text-gray-900 font-semibold text-2xl transition-colors flex items-center justify-center active:bg-gray-100"
+            >
+              {keyVal}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Action Controls Row */}
-      <div className="grid grid-cols-2 gap-2 sm:gap-3">
+      <div className="flex gap-3">
         <button
-          type="button"
           disabled={disabled}
-          onClick={handleClear}
-          className="h-14 sm:h-16 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 font-semibold text-lg transition-all duration-150 border border-rose-900/50 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
-          aria-label="Clear Amount"
+          onClick={() => { triggerHaptic(); onBackspace(); }}
+          className="h-16 w-20 shrink-0 rounded-2xl bg-white border border-gray-200 shadow-sm hover:bg-gray-50 text-gray-600 flex items-center justify-center transition-colors active:bg-gray-100"
         >
-          <RotateCcw className="w-5 h-5" />
-          <span>Clear</span>
+          <Delete className="w-6 h-6" />
         </button>
-
         <button
-          type="button"
-          disabled={disabled}
-          onClick={handleBackspace}
-          className="h-14 sm:h-16 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 font-semibold text-lg transition-all duration-150 border border-slate-800 flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50"
-          aria-label="Backspace"
+          disabled={disabled || !canCharge}
+          onClick={() => { triggerHaptic(); onCharge(); }}
+          className="h-16 flex-1 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl transition-all shadow-md active:bg-blue-800 disabled:opacity-50 disabled:shadow-none"
         >
-          <Delete className="w-5 h-5" />
-          <span>Backspace</span>
+          Charge
         </button>
       </div>
-
-      {/* Large Touch Target Charge Button */}
-      <button
-        type="button"
-        disabled={disabled || !canCharge}
-        onClick={() => {
-          triggerHaptic();
-          onCharge();
-        }}
-        className="w-full h-16 sm:h-20 mt-1 rounded-2xl bg-emerald-400 hover:bg-emerald-300 active:scale-[0.98] text-slate-950 font-extrabold text-xl sm:text-2xl shadow-lg shadow-emerald-400/20 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
-      >
-        <span>Generate Payment QR</span>
-        <span className="bg-slate-950/20 px-3 py-1 rounded-lg text-sm text-slate-950">SEP-0007</span>
-      </button>
     </div>
   );
 };

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0f17',
+  themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -25,16 +25,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-slate-950">
+      <body className="antialiased bg-gray-50 text-gray-900 min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
+        <div style={{ display: 'none' }} dangerouslySetInnerHTML={{ __html: `<!--
+THESIS: A highly polished, hyper-reliable POS terminal matching Stripe Terminal and Square POS standards, refusing the neon crypto-wallet default.
+OWN-WORLD: Minimalist, stark white backgrounds, soft drop shadows, clean borders, high-contrast typography, and a prominent blue or brand-colored primary action.
+STORY: The merchant enters a fiat amount, generates a QR code, and receives instant confirmation offline or online without blockchain jargon.
+FIRST VIEWPORT: A clean, large-target numeric keypad occupying the lower half, a crisp fiat display above it, and a prominent 'Generate QR' button.
+FORM: The category standard (Canon exit, seed key 2405ff6d).
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->` }} />
+        
         {children}
 
         {/* PWA Service Worker Registration Script */}
