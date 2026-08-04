@@ -59,7 +59,7 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
               <Store className="w-5 h-5" />
             </div>
             <div>
@@ -86,14 +86,14 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
           {/* Merchant Name */}
           <div className="space-y-1">
             <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Store className="w-3.5 h-3.5 text-cyan-400" />
+              <Store className="w-3.5 h-3.5 text-emerald-400" />
               <span>Merchant Name</span>
             </label>
             <input
               type="text"
               value={formData.merchantName}
               onChange={(e) => setFormData({ ...formData, merchantName: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:outline-none text-slate-100 font-medium"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:outline-none text-slate-100 font-medium"
               placeholder="e.g. Douala Metro Market"
             />
           </div>
@@ -101,14 +101,14 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
           {/* Stellar Public Key */}
           <div className="space-y-1">
             <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Key className="w-3.5 h-3.5 text-cyan-400" />
+              <Key className="w-3.5 h-3.5 text-emerald-400" />
               <span>Stellar Destination Public Key (G...)</span>
             </label>
             <input
               type="text"
               value={formData.publicKey}
               onChange={(e) => setFormData({ ...formData, publicKey: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:outline-none text-slate-100 font-mono text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:outline-none text-slate-100 font-mono text-xs"
               placeholder="GA..."
             />
           </div>
@@ -117,13 +117,13 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
               <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-                <DollarSign className="w-3.5 h-3.5 text-cyan-400" />
+                <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Base Fiat Currency</span>
               </label>
               <select
                 value={formData.currency}
                 onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:outline-none text-slate-100 font-medium"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:outline-none text-slate-100 font-medium"
               >
                 <option value="XAF">XAF (Central Africa CFA)</option>
                 <option value="NGN">NGN (Nigerian Naira)</option>
@@ -152,21 +152,21 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
               type="text"
               value={formData.assetIssuer}
               onChange={(e) => setFormData({ ...formData, assetIssuer: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:outline-none text-slate-100 font-mono text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:outline-none text-slate-100 font-mono text-xs"
             />
           </div>
 
           {/* WebSocket listener URL */}
           <div className="space-y-1">
             <label className="text-xs font-medium text-slate-300 flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+              <Cpu className="w-3.5 h-3.5 text-emerald-400" />
               <span>WebSocket Notification Service URL</span>
             </label>
             <input
               type="text"
               value={formData.wsUrl}
               onChange={(e) => setFormData({ ...formData, wsUrl: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:outline-none text-slate-100 font-mono text-xs"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:outline-none text-slate-100 font-mono text-xs"
               placeholder="ws://localhost:3000/ws"
             />
           </div>
@@ -175,7 +175,7 @@ export const MerchantConfigModal: React.FC<MerchantConfigModalProps> = ({
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-500 hover:from-emerald-400 hover:to-emerald-400 text-slate-950 font-bold transition-all shadow-lg flex items-center justify-center gap-2"
             >
               {savedSuccess ? (
                 <>

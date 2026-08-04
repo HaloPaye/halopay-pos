@@ -52,11 +52,11 @@ export const PaymentQRModal: React.FC<PaymentQRModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl shadow-cyan-950/40 text-slate-100 flex flex-col items-center gap-4">
+      <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl shadow-emerald-950/40 text-slate-100 flex flex-col items-center gap-4">
         {/* Modal Header */}
         <div className="w-full flex items-center justify-between pb-3 border-b border-slate-800">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
               <QrCode className="w-5 h-5" />
             </div>
             <div>
@@ -78,7 +78,7 @@ export const PaymentQRModal: React.FC<PaymentQRModalProps> = ({
         {/* Amount Breakdown Banner */}
         <div className="w-full bg-slate-950/80 rounded-2xl p-4 border border-slate-800 text-center flex flex-col items-center">
           <div className="text-xs font-medium uppercase tracking-wider text-slate-400">Total Due</div>
-          <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 my-1">
+          <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-400 my-1">
             {transaction.amountFiat.toLocaleString()} {transaction.currency}
           </div>
           <div className="text-sm font-semibold text-emerald-400 flex items-center gap-1 bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-800/60 mt-1">
@@ -103,7 +103,7 @@ export const PaymentQRModal: React.FC<PaymentQRModalProps> = ({
         <div className="w-full bg-slate-950/50 p-3 rounded-xl border border-slate-800/80 text-xs space-y-1.5 font-mono">
           <div className="flex justify-between text-slate-400">
             <span>Payment Memo:</span>
-            <span className="text-cyan-400 font-bold">{transaction.memo}</span>
+            <span className="text-emerald-400 font-bold">{transaction.memo}</span>
           </div>
           <div className="flex justify-between text-slate-400">
             <span>Asset:</span>
@@ -112,12 +112,12 @@ export const PaymentQRModal: React.FC<PaymentQRModalProps> = ({
         </div>
 
         {/* Waiting Status Bar */}
-        <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-cyan-950/30 border border-cyan-800/40 text-cyan-300 text-xs font-medium">
+        <div className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-950/30 border border-emerald-800/40 text-emerald-300 text-xs font-medium">
           <div className="flex items-center gap-2">
-            <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
+            <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
             <span>Listening for payment... ({formatSeconds(elapsed)})</span>
           </div>
-          <span className="animate-pulse font-mono text-cyan-400">LIVE WS</span>
+          <span className="animate-pulse font-mono text-emerald-400">LIVE WS</span>
         </div>
 
         {/* Actions */}
@@ -135,7 +135,7 @@ export const PaymentQRModal: React.FC<PaymentQRModalProps> = ({
             href={sep7Uri}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3 px-4 rounded-xl bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 font-semibold text-sm transition-all flex items-center justify-center gap-1.5 border border-cyan-800/50"
+            className="py-3 px-4 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-300 font-semibold text-sm transition-all flex items-center justify-center gap-1.5 border border-emerald-800/50"
           >
             <ExternalLink className="w-4 h-4" />
             <span>Open Wallet</span>

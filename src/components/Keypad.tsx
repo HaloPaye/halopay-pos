@@ -65,7 +65,7 @@ export const Keypad: React.FC<KeypadProps> = ({
             type="button"
             disabled={disabled}
             onClick={() => handleKey(keyVal)}
-            className="h-16 sm:h-20 rounded-2xl bg-slate-900/80 hover:bg-slate-800 active:bg-cyan-500/20 text-slate-100 active:text-cyan-400 font-bold text-2xl sm:text-3xl transition-all duration-150 shadow-md border border-slate-800/80 active:scale-95 flex items-center justify-center disabled:opacity-50"
+            className="h-16 sm:h-20 rounded-2xl bg-slate-900/80 hover:bg-slate-800 active:bg-emerald-500/20 text-slate-100 active:text-emerald-400 font-bold text-2xl sm:text-3xl transition-all duration-150 shadow-md border border-slate-800/80 active:scale-95 flex items-center justify-center disabled:opacity-50"
             aria-label={`Key ${keyVal}`}
           >
             {keyVal}
@@ -106,7 +106,7 @@ export const Keypad: React.FC<KeypadProps> = ({
           triggerHaptic();
           onCharge();
         }}
-        className="w-full h-16 sm:h-20 mt-1 rounded-2xl bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 active:scale-[0.98] text-slate-950 font-extrabold text-xl sm:text-2xl shadow-lg shadow-cyan-500/20 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
+        className="w-full h-16 sm:h-20 mt-1 rounded-2xl bg-emerald-400 hover:bg-emerald-300 active:scale-[0.98] text-slate-950 font-extrabold text-xl sm:text-2xl shadow-lg shadow-emerald-400/20 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
       >
         <span>Generate Payment QR</span>
         <span className="bg-slate-950/20 px-3 py-1 rounded-lg text-sm text-slate-950">SEP-0007</span>
