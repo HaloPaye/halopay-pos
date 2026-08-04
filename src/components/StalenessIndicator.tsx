@@ -86,7 +86,7 @@ export const StalenessIndicator: React.FC<StalenessIndicatorProps> = ({
             title="Refresh Exchange Rate"
             aria-label="Refresh Exchange Rate"
           >
-            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-cyan-400' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-emerald-400' : ''}`} />
           </button>
         </div>
       </div>

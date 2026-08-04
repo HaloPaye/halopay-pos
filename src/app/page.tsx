@@ -1,350 +1,124 @@
-'use client';
+import Link from 'next/link';
+import React from 'react';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { Settings, ShieldCheck, History, ArrowUpRight, Zap, RefreshCw, CreditCard, Sparkles } from 'lucide-react';
-import {
-  getMerchantConfig,
-  getTransactionHistory,
-  saveTransaction,
-  MerchantConfig,
-  TransactionRecord,
-} from '@/lib/storage';
-import {
-  getCurrentRate,
-  refreshExchangeRate,
-  convertFiatToCrypto,
-  RateResult,
-} from '@/lib/exchange-rate';
-import { generateSep7PayUri, generatePaymentMemo } from '@/lib/qr-generator';
-import { Keypad } from '@/components/Keypad';
-import { StalenessIndicator } from '@/components/StalenessIndicator';
-import { PaymentQRModal } from '@/components/PaymentQRModal';
-import { PaymentNotification } from '@/components/PaymentNotification';
-import { MerchantConfigModal } from '@/components/MerchantConfigModal';
-
-export default function POSPage() {
-  const [config, setConfig] = useState<MerchantConfig | null>(null);
-  const [rateResult, setRateResult] = useState<RateResult | null>(null);
-  const [isRefreshingRate, setIsRefreshingRate] = useState(false);
-
-  // Amount input state (stored as raw string)
-  const [amountStr, setAmountStr] = useState<string>('0');
-
-  // Modal states
-  const [isConfigOpen, setIsConfigOpen] = useState(false);
-  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-
-  // Current active payment transaction
-  const [activeTx, setActiveTx] = useState<TransactionRecord | null>(null);
-  const [activeSep7Uri, setActiveSep7Uri] = useState<string>('');
-
-  // History state
-  const [history, setHistory] = useState<TransactionRecord[]>([]);
-
-  // Load initial settings and rates
-  useEffect(() => {
-    const loadedConfig = getMerchantConfig();
-    setConfig(loadedConfig);
-    setHistory(getTransactionHistory());
-
-    const rate = getCurrentRate(loadedConfig.currency);
-    setRateResult(rate);
-  }, []);
-
-  // Update staleness ticker every 30s
-  useEffect(() => {
-    if (!config) return;
-    const interval = setInterval(() => {
-      setRateResult(getCurrentRate(config.currency));
-    }, 30000);
-    return () => clearInterval(interval);
-  }, [config]);
-
-  // Handle manual rate refresh
-  const handleRefreshRate = async () => {
-    if (!config) return;
-    setIsRefreshingRate(true);
-    try {
-      const refreshed = await refreshExchangeRate(config.currency);
-      setRateResult(refreshed);
-    } finally {
-      setIsRefreshingRate(false);
-    }
-  };
-
-  // Keypad input handlers
-  const handleKeyPress = (key: string) => {
-    setAmountStr((prev) => {
-      if (prev === '0' && key !== '.') {
-        return key;
-      }
-      if (key === '.' && prev.includes('.')) {
-        return prev;
-      }
-      // Limit to reasonable max digits
-      if (prev.length >= 9) return prev;
-      return prev + key;
-    });
-  };
-
-  const handleClear = () => {
-    setAmountStr('0');
-  };
-
-  const handleBackspace = () => {
-    setAmountStr((prev) => {
-      if (prev.length <= 1) return '0';
-      return prev.slice(0, -1);
-    });
-  };
-
-  const handleQuickAdd = (addVal: number) => {
-    const current = parseFloat(amountStr) || 0;
-    setAmountStr((current + addVal).toString());
-  };
-
-  // Compute numeric values
-  const numericAmount = parseFloat(amountStr) || 0;
-  const currentRate = rateResult?.rate || 615.5;
-  const cryptoAmount = convertFiatToCrypto(numericAmount, currentRate);
-
-  // Generate Payment QR Modal trigger
-  const handleCharge = () => {
-    if (!config || numericAmount <= 0) return;
-
-    const memo = generatePaymentMemo();
-    const newTx: TransactionRecord = {
-      id: 'tx_' + Date.now().toString(36),
-      amountFiat: numericAmount,
-      currency: config.currency,
-      amountCrypto: cryptoAmount,
-      assetCode: config.assetCode,
-      memo,
-      timestamp: Date.now(),
-      status: 'pending',
-    };
-
-    const uri = generateSep7PayUri({
-      destination: config.publicKey,
-      amount: cryptoAmount,
-      assetCode: config.assetCode,
-      assetIssuer: config.assetIssuer,
-      memo: newTx.memo,
-      memoType: 'MEMO_TEXT',
-    });
-
-    setActiveTx(newTx);
-    setActiveSep7Uri(uri);
-    saveTransaction(newTx);
-    setHistory(getTransactionHistory());
-    setIsQRModalOpen(true);
-  };
-
-  // WebSocket payment confirmation callback
-  const handlePaymentConfirmed = useCallback(
-    (tx: TransactionRecord, txHash: string) => {
-      const completedTx: TransactionRecord = {
-        ...tx,
-        status: 'completed',
-        txHash,
-      };
-      saveTransaction(completedTx);
-      setHistory(getTransactionHistory());
-      setActiveTx(completedTx);
-      setIsQRModalOpen(false);
-      setAmountStr('0');
-    },
-    []
-  );
-
-  if (!config || !rateResult) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-cyan-400 font-mono">
-        <RefreshCw className="w-8 h-8 animate-spin mb-3" />
-        <span>Initializing HaloPay POS Terminal...</span>
-      </div>
-    );
-  }
-
+export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between max-w-lg mx-auto p-4 sm:p-6 space-y-4">
-      {/* Top Navbar */}
-      <header className="flex items-center justify-between p-3.5 rounded-2xl glass-panel shadow-lg">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 text-slate-950 font-black shadow-md shadow-cyan-500/20">
-            <Zap className="w-5 h-5 fill-current" />
+    <div className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-emerald-400/30">
+      {/* Navbar */}
+      <nav className="border-b border-slate-800 glass-panel sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-emerald-400 flex items-center justify-center text-slate-950 font-bold">H</div>
+            <span className="text-xl font-bold tracking-tight">HaloPay</span>
           </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <h1 className="font-extrabold text-lg text-slate-100 tracking-tight">{config.merchantName}</h1>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-300">
-                POS
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 font-mono">
-              {config.publicKey.substring(0, 6)}...{config.publicKey.slice(-4)}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setIsHistoryOpen(!isHistoryOpen)}
-            className="p-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 transition-all border border-slate-800 relative"
-            title="Transaction History"
-            aria-label="Transaction History"
+          <Link 
+            href="/pos" 
+            className="px-4 py-2 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-semibold rounded-lg transition-colors"
           >
-            <History className="w-5 h-5" />
-            {history.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cyan-500 text-slate-950 font-bold text-[10px] flex items-center justify-center">
-                {history.length}
-              </span>
-            )}
-          </button>
+            Launch POS Terminal
+          </Link>
+        </div>
+      </nav>
 
-          <button
-            type="button"
-            onClick={() => setIsConfigOpen(true)}
-            className="p-2.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 transition-all border border-slate-800"
-            title="Merchant Settings"
-            aria-label="Merchant Settings"
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Hero Section */}
+        <section className="text-center py-20 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+            Empowering <span className="text-emerald-400">Humanitarian Aid</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Bridging digital humanitarian aid (USDC via SDP/Stellar Aid Assist) with local merchants in no-rail environments. A robust, offline-first Point of Sale terminal.
+          </p>
+          <Link 
+            href="/pos" 
+            className="inline-flex items-center px-8 py-4 text-lg font-bold bg-emerald-400 hover:bg-emerald-300 text-slate-950 rounded-full transition-transform hover:scale-105 shadow-glow-emerald"
           >
-            <Settings className="w-5 h-5" />
-          </button>
-        </div>
-      </header>
+            Launch POS Terminal
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+          </Link>
+        </section>
 
-      {/* Offline Exchange Rate Staleness Indicator */}
-      <StalenessIndicator
-        rate={rateResult.rate}
-        currency={rateResult.currency}
-        staleness={rateResult.staleness}
-        source={rateResult.source}
-        onRefresh={handleRefreshRate}
-        isRefreshing={isRefreshingRate}
-      />
-
-      {/* Main Terminal Display (Fiat Amount + Converted Crypto Estimate) */}
-      <main className="flex-1 flex flex-col justify-center space-y-4 my-2">
-        <div className="w-full glass-panel rounded-3xl p-6 border border-slate-800 shadow-2xl flex flex-col items-center justify-center text-center space-y-2 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-          
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Enter Charge Amount ({config.currency})
-          </span>
-
-          {/* Large Touch Amount Display */}
-          <div className="text-4xl sm:text-5xl font-black tracking-tight text-slate-100 font-mono my-2 break-all">
-            {numericAmount.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-            <span className="text-2xl sm:text-3xl text-cyan-400 ml-2">{config.currency}</span>
+        {/* Features Grid */}
+        <section className="py-20 border-t border-slate-800/50">
+          <div className="grid md:grid-cols-2 gap-8">
+            <FeatureCard 
+              title="Offline-First PWA" 
+              description="Keep operating even when the internet drops. Progressive Web App technology ensures the terminal is always available."
+              icon="⚡"
+            />
+            <FeatureCard 
+              title="SEP-0007 Payment URIs" 
+              description="Seamless interoperability with Stellar wallets via standard QR code generation for secure payment routing."
+              icon="🔗"
+            />
+            <FeatureCard 
+              title="SEP-24 Fiat Off-Ramp" 
+              description="Integrated support for direct fiat withdrawals, allowing merchants to convert digital aid directly into local currency."
+              icon="💱"
+            />
+            <FeatureCard 
+              title="Real-Time WebSockets" 
+              description="Instant payment confirmation notifications powered by Horizon and HaloPay's resilient websocket backend."
+              icon="📡"
+            />
           </div>
+        </section>
 
-          {/* Converted USDC Banner */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/60 border border-emerald-800/80 text-emerald-300 font-medium text-sm sm:text-base">
-            <Sparkles className="w-4 h-4 text-emerald-400" />
-            <span>≈ {cryptoAmount.toFixed(2)} {config.assetCode}</span>
-            <span className="text-xs text-emerald-500/80">(@ {currentRate} {config.currency})</span>
+        {/* Architecture Flow */}
+        <section className="py-20 border-t border-slate-800/50">
+          <h2 className="text-3xl font-bold text-center mb-12">System Architecture</h2>
+          <div className="glass-card p-8 rounded-2xl max-w-4xl mx-auto flex justify-center">
+            <svg width="100%" viewBox="0 0 800 300" className="text-slate-300 fill-current" xmlns="http://www.w3.org/2000/svg">
+              {/* Terminal */}
+              <rect x="50" y="100" width="140" height="80" rx="8" className="fill-slate-800 stroke-slate-600" strokeWidth="2"/>
+              <text x="120" y="145" textAnchor="middle" className="text-sm font-mono fill-emerald-400">POS Terminal</text>
+              
+              {/* Arrow */}
+              <path d="M 190 140 L 330 140" stroke="currentColor" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <text x="260" y="130" textAnchor="middle" className="text-xs fill-slate-500">SEP-0007 QR</text>
+
+              {/* Wallet */}
+              <rect x="330" y="100" width="140" height="80" rx="8" className="fill-slate-800 stroke-slate-600" strokeWidth="2"/>
+              <text x="400" y="145" textAnchor="middle" className="text-sm font-mono fill-emerald-400">Stellar Wallet</text>
+
+              {/* Arrow */}
+              <path d="M 470 140 L 610 140" stroke="currentColor" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <text x="540" y="130" textAnchor="middle" className="text-xs fill-slate-500">Submit TX</text>
+
+              {/* Network */}
+              <circle cx="680" cy="140" r="50" className="fill-slate-800 stroke-emerald-500" strokeWidth="2"/>
+              <text x="680" y="145" textAnchor="middle" className="text-sm font-mono fill-emerald-400">Network</text>
+
+              {/* Feedback Loop */}
+              <path d="M 680 190 Q 680 250 400 250 T 120 180" fill="none" stroke="#34d399" strokeWidth="2" strokeDasharray="5,5" markerEnd="url(#arrowhead-green)"/>
+              <text x="400" y="240" textAnchor="middle" className="text-xs fill-emerald-500">WebSocket Confirmation</text>
+
+              <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
+                </marker>
+                <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+                </marker>
+              </defs>
+            </svg>
           </div>
-
-          {/* Quick Preset Amount Buttons */}
-          <div className="w-full grid grid-cols-4 gap-2 pt-3">
-            {[500, 1000, 5000, 10000].map((preset) => (
-              <button
-                key={preset}
-                type="button"
-                onClick={() => handleQuickAdd(preset)}
-                className="py-1.5 px-2 rounded-xl bg-slate-900/60 hover:bg-slate-800 text-xs font-semibold text-slate-300 border border-slate-800 transition-all active:scale-95"
-              >
-                +{preset >= 1000 ? `${preset / 1000}k` : preset}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Responsive Large-Touch Target Keypad */}
-        <Keypad
-          onKeyPress={handleKeyPress}
-          onClear={handleClear}
-          onBackspace={handleBackspace}
-          onCharge={handleCharge}
-          canCharge={numericAmount > 0}
-        />
+        </section>
       </main>
 
-      {/* Transaction History Drawer */}
-      {isHistoryOpen && (
-        <div className="glass-panel rounded-3xl p-4 border border-slate-800 max-h-60 overflow-y-auto space-y-2 animate-fade-in">
-          <div className="flex justify-between items-center pb-2 border-b border-slate-800 text-xs font-bold text-slate-400 uppercase tracking-wider">
-            <span>Recent POS Transactions</span>
-            <button
-              onClick={() => setIsHistoryOpen(false)}
-              className="text-slate-400 hover:text-slate-200"
-            >
-              Close
-            </button>
-          </div>
+      <footer className="border-t border-slate-800 py-8 text-center text-slate-500 text-sm">
+        <p>&copy; {new Date().getFullYear()} HaloPay. Open source software.</p>
+      </footer>
+    </div>
+  );
+}
 
-          {history.length === 0 ? (
-            <p className="text-xs text-slate-500 text-center py-4">No recent transactions recorded</p>
-          ) : (
-            history.map((tx) => (
-              <div
-                key={tx.id}
-                className="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs"
-              >
-                <div>
-                  <div className="font-bold text-slate-200">
-                    {tx.amountFiat.toLocaleString()} {tx.currency} (≈ {tx.amountCrypto} {tx.assetCode})
-                  </div>
-                  <div className="text-[10px] text-slate-400 font-mono">
-                    Memo: {tx.memo} • {new Date(tx.timestamp).toLocaleTimeString()}
-                  </div>
-                </div>
-
-                <span
-                  className={`px-2 py-0.5 rounded-full font-bold text-[10px] ${
-                    tx.status === 'completed'
-                      ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                      : 'bg-amber-950 text-amber-300 border border-amber-800'
-                  }`}
-                >
-                  {tx.status}
-                </span>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
-      {/* Modals & Background Services */}
-      {activeTx && (
-        <PaymentQRModal
-          isOpen={isQRModalOpen}
-          onClose={() => setIsQRModalOpen(false)}
-          sep7Uri={activeSep7Uri}
-          transaction={activeTx}
-          merchantName={config.merchantName}
-        />
-      )}
-
-      <PaymentNotification
-        wsUrl={config.wsUrl}
-        publicKey={config.publicKey}
-        activeTransaction={activeTx}
-        onPaymentConfirmed={handlePaymentConfirmed}
-      />
-
-      <MerchantConfigModal
-        isOpen={isConfigOpen}
-        onClose={() => setIsConfigOpen(false)}
-        config={config}
-        onSave={(updated) => {
-          setConfig(updated);
-          setRateResult(getCurrentRate(updated.currency));
-        }}
-      />
+function FeatureCard({ title, description, icon }: { title: string, description: string, icon: string }) {
+  return (
+    <div className="glass-panel p-8 rounded-xl hover:border-emerald-500/50 transition-colors">
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-xl font-bold mb-3 text-slate-100">{title}</h3>
+      <p className="text-slate-400 leading-relaxed">{description}</p>
     </div>
   );
 }

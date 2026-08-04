@@ -10,23 +10,23 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          50: '#ecfeff',
-          100: '#cffaff',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#06b6d4',
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
-          950: '#083344',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#10b981',
+          600: '#059669',
+          700: '#047857',
+          800: '#065f46',
+          900: '#064e3b',
+          950: '#022c22',
         },
-        stellar: {
-          purple: '#7d00ff',
-          navy: '#0b0f17',
-          card: '#131927',
-          border: '#1f293d',
+        fintech: {
+          accent: '#34d399', // emerald-400
+          bg: '#020617', // slate-950
+          card: 'rgba(15, 23, 42, 0.8)', // slate-900/80
+          border: '#1e293b', // slate-800
         }
       },
       fontFamily: {
@@ -34,9 +34,7 @@ module.exports = {
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.4)',
-        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.4)',
-        'glow-purple': '0 0 25px -5px rgba(125, 0, 255, 0.4)',
+        'glow-emerald': '0 0 25px -5px rgba(52, 211, 153, 0.4)',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
