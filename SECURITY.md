@@ -1,4 +1,4 @@
-# Security Policy 🔒
+# Security Policy
 
 ## Supported Versions
 
@@ -6,11 +6,11 @@ Only the latest release on the `main` branch is actively supported with security
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
+| 0.1.x   | Yes                |
 
 ---
 
-## 🛡️ Reporting Vulnerabilities
+## Reporting Vulnerabilities
 
 If you discover a potential security vulnerability within HaloPay Merchant POS, please **DO NOT** create a public GitHub issue.
 
@@ -26,7 +26,7 @@ We aim to acknowledge receipt of all security reports within 24 hours and issue 
 
 ---
 
-## 🔑 Key Management Guidelines
+## Key Management Guidelines
 
 * HaloPay POS **NEVER** stores merchant secret keys (`S...`) or private keys.
 * Only public Stellar addresses (`G...`) are stored in client LocalStorage.

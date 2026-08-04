@@ -1,4 +1,4 @@
-# HaloPay Merchant POS (PWA) 📱⚡
+# HaloPay Merchant POS (PWA)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Stellar](https://img.shields.io/badge/Network-Stellar%20Mainnet%2FTestnet-purple.svg)](https://stellar.org)
@@ -10,7 +10,7 @@ Designed specifically for low-cost Android POS devices and smartphones with limi
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 * **Offline SEP-0007 Payment URI Generator**: Instantly formats standard `web+stellar:pay` QR codes with custom destination address, USDC asset parameters, memo tracking, and converted crypto amounts.
 * **Cached Rate Engine & Staleness Indicator**: Manages offline fiat exchange rates (e.g. XAF to USDC) with visual staleness banners (`"Rate updated 14 minutes ago"`, alert threshold warnings).
@@ -21,7 +21,21 @@ Designed specifically for low-cost Android POS devices and smartphones with limi
 
 ---
 
-## 📁 Repository Structure
+## Architecture Diagram
+
+```mermaid
+graph TD
+    A[Merchant POS Terminal] -->|Inputs Fiat Amount| B(Staleness & Rate Engine)
+    B -->|Offline Conversion| C{SEP-0007 QR Generator}
+    C -->|QR Code| D[Customer Stellar Wallet]
+    D -->|Submit TX| E((Stellar Network))
+    E -->|Broadcast| F[HaloPay Backend]
+    F -->|WebSocket Conf| A
+```
+
+---
+
+## Repository Structure
 
 ```
 halopay-pos/
@@ -30,9 +44,10 @@ halopay-pos/
 │   └── sw.js                      # Service Worker caching engine
 ├── src/
 │   ├── app/
-│   │   ├── globals.css            # Tailwind directives & glassmorphic aesthetics
+│   │   ├── globals.css            # Tailwind directives & aesthetics
 │   │   ├── layout.tsx             # Root layout with PWA meta & SW registration
-│   │   └── page.tsx               # Main POS terminal application screen
+│   │   ├── page.tsx               # Marketing Landing Page
+│   │   └── pos/page.tsx           # Main POS terminal application screen
 │   ├── components/
 │   │   ├── Keypad.tsx             # Large touch target keypad component
 │   │   ├── MerchantConfigModal.tsx# Merchant setup & Stellar key configuration
@@ -56,7 +71,16 @@ halopay-pos/
 
 ---
 
-## ⚡ Quick Start
+## Environment Variables
+
+| Variable | Description | Default |
+| -------- | ----------- | ------- |
+| `NEXT_PUBLIC_WS_URL` | WebSocket URL for transaction confirmations | `wss://api.halopay.io/ws` |
+| `NEXT_PUBLIC_HORIZON_URL` | Stellar Horizon server URL | `https://horizon.stellar.org` |
+
+---
+
+## Quick Start
 
 ### Prerequisites
 
@@ -92,7 +116,7 @@ npm start
 
 ---
 
-## 📖 SEP-0007 Payment Flow
+## SEP-0007 Payment Flow
 
 1. Merchant enters total sale amount in local currency (e.g. `5,000 XAF`).
 2. Terminal converts `5,000 XAF` to `≈ 8.12 USDC` using the cached exchange rate (e.g. `615.5 XAF/USDC`).
@@ -105,6 +129,12 @@ npm start
 
 ---
 
-## 📄 License
+## Maintainers
+
+* **HaloPay Dev Team** - devs@halopay.io
+
+---
+
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.

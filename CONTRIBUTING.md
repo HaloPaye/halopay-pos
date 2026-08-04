@@ -1,16 +1,16 @@
-# Contributing to HaloPay Merchant POS 🛠️
+# Contributing to HaloPay Merchant POS
 
 Thank you for your interest in contributing to HaloPay POS! We welcome contributions from developers of all skill levels.
 
 ---
 
-## 📜 Code of Conduct
+## Code of Conduct
 
 Please maintain a respectful, inclusive, and professional environment across all issue discussions, pull requests, and code reviews.
 
 ---
 
-## 🔀 Branching Strategy & Workflow
+## Branching Strategy & Workflow
 
 1. Fork the repository and clone your fork locally.
 2. Create a feature branch off `main`:
@@ -27,7 +27,16 @@ Please maintain a respectful, inclusive, and professional environment across all
 
 ---
 
-## 📝 Conventional Commits Specification
+## Pull Request Rules
+
+* All PRs must target the `main` branch.
+* Ensure CI checks (linting, typescript compilation, and tests) pass before requesting a review.
+* Include a descriptive title and reference any related issues (e.g., `Fixes #123`).
+* Keep PRs focused on a single feature or bug fix to expedite the review process.
+
+---
+
+## Conventional Commits Specification
 
 All commit messages MUST adhere to the [Conventional Commits](https://www.conventionalcommits.org/) format:
 
@@ -54,7 +63,7 @@ All commit messages MUST adhere to the [Conventional Commits](https://www.conven
 
 ---
 
-## 🧪 Testing Guidelines
+## Testing Guidelines
 
 * Unit tests reside in the `tests/` directory.
 * Run tests with `npm test`.
