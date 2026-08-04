@@ -1,0 +1,110 @@
+# HaloPay Merchant POS (PWA) 📱⚡
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Stellar](https://img.shields.io/badge/Network-Stellar%20Mainnet%2FTestnet-purple.svg)](https://stellar.org)
+[![SEP-0007](https://img.shields.io/badge/Standard-SEP--0007-cyan.svg)](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0007.md)
+
+**HaloPay Merchant POS** is an offline-first Progressive Web Application (PWA) enabling local brick-and-mortar merchants in emerging markets to accept **USDC payments over the Stellar network** with instant fiat exchange rate conversions (XAF, NGN, KES, GHS).
+
+Designed specifically for low-cost Android POS devices and smartphones with limited connectivity, HaloPay POS guarantees payment terminal operation even when internet connectivity drops.
+
+---
+
+## 🌟 Key Features
+
+* **Offline SEP-0007 Payment URI Generator**: Instantly formats standard `web+stellar:pay` QR codes with custom destination address, USDC asset parameters, memo tracking, and converted crypto amounts.
+* **Cached Rate Engine & Staleness Indicator**: Manages offline fiat exchange rates (e.g. XAF to USDC) with visual staleness banners (`"Rate updated 14 minutes ago"`, alert threshold warnings).
+* **Large-Touch Target Keypad**: Custom responsive touch keypad optimized for 480p/720p low-end Android touch screens with haptic press simulation.
+* **Real-time WebSocket Listener**: Listens for on-chain Stellar transaction confirmations broadcast by the HaloPay settlement backend, displaying instant high-visibility payment completion toasts.
+* **PWA Service Worker**: Full app shell pre-caching and offline capability via `manifest.json` and `sw.js`.
+* **Merchant Configuration**: Easily update merchant name, Stellar public key, base fiat currency, USDC issuer address, and WebSocket endpoint.
+
+---
+
+## 📁 Repository Structure
+
+```
+halopay-pos/
+├── public/
+│   ├── manifest.json              # PWA Web App Manifest
+│   └── sw.js                      # Service Worker caching engine
+├── src/
+│   ├── app/
+│   │   ├── globals.css            # Tailwind directives & glassmorphic aesthetics
+│   │   ├── layout.tsx             # Root layout with PWA meta & SW registration
+│   │   └── page.tsx               # Main POS terminal application screen
+│   ├── components/
+│   │   ├── Keypad.tsx             # Large touch target keypad component
+│   │   ├── MerchantConfigModal.tsx# Merchant setup & Stellar key configuration
+│   │   ├── PaymentNotification.tsx# WebSocket live payment confirmation listener
+│   │   ├── PaymentQRModal.tsx     # High-contrast SEP-0007 QR modal
+│   │   └── StalenessIndicator.tsx # Offline rate staleness UI banner
+│   └── lib/
+│       ├── exchange-rate.ts       # Rate conversion & staleness math engine
+│       ├── qr-generator.ts        # SEP-0007 URI generator & parser
+│       └── storage.ts             # LocalStorage wrapper for settings & rates
+├── tests/
+│   └── exchange-rate.test.ts      # Unit tests for staleness & SEP-0007 URIs
+├── scripts/
+│   └── create_issues.ps1          # GitHub CLI issue creation script (Drips Wave format)
+├── CONTRIBUTING.md                # Contribution guidelines & commit standards
+├── SECURITY.md                    # Security vulnerability reporting policy
+├── jest.config.js                 # Jest unit testing configuration
+├── tailwind.config.js             # Tailwind CSS theme configuration
+└── package.json                   # Dependencies & build scripts
+```
+
+---
+
+## ⚡ Quick Start
+
+### Prerequisites
+
+* Node.js v18.x or higher
+* npm or pnpm
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Run Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser or install on mobile via **Add to Home Screen**.
+
+### 3. Run Unit Tests
+
+```bash
+npm test
+```
+
+### 4. Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 📖 SEP-0007 Payment Flow
+
+1. Merchant enters total sale amount in local currency (e.g. `5,000 XAF`).
+2. Terminal converts `5,000 XAF` to `≈ 8.12 USDC` using the cached exchange rate (e.g. `615.5 XAF/USDC`).
+3. Tapping **Generate Payment QR** creates a standard SEP-0007 Stellar payment URI:
+   ```
+   web+stellar:pay?destination=GBCW66G...&amount=8.12&asset_code=USDC&asset_issuer=GBBD47I...&memo=HALO-LN8K-A29&memo_type=MEMO_TEXT
+   ```
+4. Customer scans QR code with any Stellar wallet (e.g., LOBSTR, Beans, Vibrant) to confirm.
+5. The POS terminal's WebSocket listener receives instant confirmation from Horizon / HaloPay API server and displays a success notification with haptic feedback.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
