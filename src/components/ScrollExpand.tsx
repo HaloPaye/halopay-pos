@@ -42,6 +42,7 @@ export interface ScrollExpandProps {
   useWindowScroll?: boolean;
   enabled?: boolean;
   children?: ReactNode;
+  childrenMedia?: ReactNode;
   className?: string;
   style?: CSSProperties;
   [key: string]: unknown;
@@ -66,6 +67,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
   useWindowScroll = false,
   enabled = true,
   children,
+  childrenMedia,
   className = '',
   style,
   ...rest
@@ -251,7 +253,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
         className="absolute inset-0 w-full h-full origin-center select-none [will-change:transform] bg-white border border-gray-200"
       >
         {/* We can place Strands inside the media component if no src is provided, allowing it to expand */}
-        {rest.childrenMedia}
+        {childrenMedia}
       </div>
     );
 
