@@ -6,9 +6,6 @@ import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
 import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
-import GradualBlur from '@/components/GradualBlur';
-import ScrollExpand from '@/components/ScrollExpand';
-import Strands from '@/components/Strands';
 
 export default function LandingPage() {
   return (
@@ -37,62 +34,32 @@ export default function LandingPage() {
       </nav>
 
       <main>
-        {/* Phase 1: Hero Section */}
-        <section style={{ height: '140vh' }} className="relative bg-[#f9fafb]">
-          <ScrollExpand
-            useWindowScroll
-            scrollHint="Scroll to explore"
-            startWidth={75}
-            startHeight={60}
-            mediaZoom={1.05}
-            childrenMedia={
-              <div className="w-full h-full bg-white relative flex items-center justify-center overflow-hidden border border-gray-200">
-                <Strands 
-                  colors={['#2563eb', '#9ca3af', '#e5e7eb', '#111827']} 
-                  count={4} 
-                  glow={0.2} 
-                  thickness={0.03} 
-                  intensity={1}
-                  scale={1.2}
-                  className="opacity-40"
-                />
-              </div>
-            }
-            title={
-              <div className="flex flex-col items-center mt-[-10vh]">
-                 <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-white border border-gray-200 shadow-sm text-blue-700 mb-6">
-                    <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2"></span>
-                    Stellar Next-Gen Platform Live
-                  </div>
-                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-4 leading-tight drop-shadow-sm">
-                   The standard for <br/> <span className="text-blue-600">crypto point-of-sale</span>
-                 </h1>
-              </div>
-            }
-          >
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-              <p className="text-2xl text-gray-700 mb-10 leading-relaxed font-medium">
-                Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <section className="relative bg-white pt-32 pb-24 md:pt-48 md:pb-32 border-b border-gray-200 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight max-w-4xl mx-auto">
+               The standard for <br/> <span className="text-blue-600">crypto point-of-sale</span>
+             </h1>
+             <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed font-medium max-w-3xl mx-auto">
+               Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
+             </p>
+             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <SpecularButton 
                   as="a"
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0" 
+                  className="text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0 w-full sm:w-auto" 
                 >
                   Start Free Trial
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
                   href="#how-it-works"
-                  className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold"
+                  className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold w-full sm:w-auto"
                   secondary
                 >
                   View Documentation
                 </SpecularButton>
-              </div>
-            </div>
-          </ScrollExpand>
+             </div>
+          </div>
         </section>
 
         {/* Phase 2: Core Messaging & Mechanism */}
@@ -296,18 +263,6 @@ export default function LandingPage() {
         </div>
       </footer>
       
-      {/* Page-level gradual blur overlay at the bottom of the viewport */}
-      <GradualBlur
-        target="page"
-        position="bottom"
-        height="6rem"
-        strength={2}
-        divCount={5}
-        curve="bezier"
-        exponential={true}
-        opacity={1}
-        zIndex={50}
-      />
     </div>
   );
 }
