@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Delete } from 'lucide-react';
-import SpecularButton from './SpecularButton';
+
 
 interface KeypadProps {
   onKeyPress: (key: string) => void;
@@ -35,9 +35,9 @@ export const Keypad: React.FC<KeypadProps> = ({
   ];
 
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col gap-3">
+    <div className="w-full max-w-sm mx-auto flex flex-col gap-2">
       {/* Numpad */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-2">
         {keys.flat().map((keyVal) => {
           if (keyVal === 'clear') {
             return (
@@ -45,7 +45,7 @@ export const Keypad: React.FC<KeypadProps> = ({
                 key={keyVal}
                 disabled={disabled}
                 onClick={() => { triggerHaptic(); onClear(); }}
-                className="h-16 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold text-lg transition-colors flex items-center justify-center active:bg-gray-300"
+                className="h-20 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-500 font-medium text-lg transition-colors flex items-center justify-center active:bg-gray-100"
               >
                 Clear
               </button>
@@ -56,7 +56,7 @@ export const Keypad: React.FC<KeypadProps> = ({
               key={keyVal}
               disabled={disabled}
               onClick={() => { triggerHaptic(); onKeyPress(keyVal); }}
-              className="h-16 rounded-2xl bg-white border border-gray-200 shadow-sm hover:bg-gray-50 text-gray-900 font-semibold text-2xl transition-colors flex items-center justify-center active:bg-gray-100"
+              className="h-20 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-900 font-semibold text-3xl transition-colors flex items-center justify-center active:bg-gray-100"
             >
               {keyVal}
             </button>
@@ -64,21 +64,25 @@ export const Keypad: React.FC<KeypadProps> = ({
         })}
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex gap-2">
         <button
           disabled={disabled}
           onClick={() => { triggerHaptic(); onBackspace(); }}
-          className="h-16 w-20 shrink-0 rounded-2xl bg-white border border-gray-200 shadow-sm hover:bg-gray-50 text-gray-600 flex items-center justify-center transition-colors active:bg-gray-100"
+          className="h-20 w-[30%] shrink-0 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-600 flex items-center justify-center transition-colors active:bg-gray-100"
         >
-          <Delete className="w-6 h-6" />
+          <Delete className="w-7 h-7" />
         </button>
-        <SpecularButton
+        <button
           disabled={disabled || !canCharge}
           onClick={() => { triggerHaptic(); onCharge(); }}
-          className="h-16 flex-1 !text-xl"
+          className={`h-20 flex-1 rounded-2xl text-2xl font-bold transition-all shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] ${
+            disabled || !canCharge 
+              ? 'bg-blue-600/50 text-white/50 shadow-none'
+              : 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800'
+          }`}
         >
           Charge
-        </SpecularButton>
+        </button>
       </div>
     </div>
   );
