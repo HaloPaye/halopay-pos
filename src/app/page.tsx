@@ -6,6 +6,9 @@ import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
 import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
+import GradualBlur from '@/components/GradualBlur';
+import ScrollExpand from '@/components/ScrollExpand';
+import Strands from '@/components/Strands';
 
 export default function LandingPage() {
   return (
@@ -35,75 +38,61 @@ export default function LandingPage() {
 
       <main>
         {/* Phase 1: Hero Section */}
-        <section className="relative overflow-hidden bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32 flex flex-col items-center text-center">
-            
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 text-gray-900 max-w-4xl leading-tight">
-              Bridging Humanitarian Aid and <br className="hidden md:block"/>
-              <span className="text-blue-600">Local Informal Commerce</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mb-12 leading-relaxed font-medium">
-              HaloPaye provides true "no-rail" crisis zones with merchant-side POS systems, allowing local vendors to natively accept digital aid (USDC) and receive compliant settlement via MoneyGram.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <SpecularButton 
-                as={Link}
-                href="/pos" 
-                size="lg"
-                className="w-full sm:w-auto min-w-[240px]"
-              >
-                Launch POS Terminal
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </SpecularButton>
-              <SpecularButton 
-                as="a"
-                href="#how-it-works" 
-                size="lg"
-                tint="#ffffff"
-                textColor="#111827"
-                baseColor="#e5e7eb"
-                lineColor="#2563eb"
-                className="w-full sm:w-auto min-w-[240px]"
-              >
-                Learn More
-              </SpecularButton>
-            </div>
-
-            {/* Abstracted Bridge Visual */}
-            <div className="mt-20 w-full max-w-5xl mx-auto">
-              <div className="bg-gray-50 rounded-3xl p-8 border border-gray-200 shadow-sm flex items-center justify-between relative overflow-hidden hidden md:flex">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
-                {/* Left: Digital Aid */}
-                <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm z-10 w-64 text-left">
-                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
-                    <Globe2 className="w-6 h-6" />
+        <section style={{ height: '140vh' }} className="relative bg-[#f9fafb]">
+          <ScrollExpand
+            useWindowScroll
+            scrollHint="Scroll to explore"
+            startWidth={75}
+            startHeight={60}
+            mediaZoom={1.05}
+            childrenMedia={
+              <div className="w-full h-full bg-white relative flex items-center justify-center overflow-hidden border border-gray-200">
+                <Strands 
+                  colors={['#2563eb', '#9ca3af', '#e5e7eb', '#111827']} 
+                  count={4} 
+                  glow={0.2} 
+                  thickness={0.03} 
+                  intensity={1}
+                  scale={1.2}
+                  className="opacity-40"
+                />
+              </div>
+            }
+            title={
+              <div className="flex flex-col items-center mt-[-10vh]">
+                 <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-white border border-gray-200 shadow-sm text-blue-700 mb-6">
+                    <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2"></span>
+                    Stellar Next-Gen Platform Live
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-1">Digital Aid (USDC)</h3>
-                  <p className="text-sm text-gray-500">Powered by Stellar Network</p>
-                </div>
-                
-                {/* Center: The Bridge */}
-                <div className="flex-1 flex items-center justify-center relative z-0 px-8">
-                  <div className="w-full h-1 bg-gray-200 absolute top-1/2 -translate-y-1/2"></div>
-                  <div className="w-full h-1 bg-blue-600 absolute top-1/2 -translate-y-1/2 scale-x-0 origin-left animate-[grow_1.5s_ease-out_forwards]"></div>
-                  <div className="bg-white px-6 py-3 rounded-full border-2 border-blue-600 text-blue-600 font-bold z-10 shadow-sm">
-                    HaloPaye Bridge
-                  </div>
-                </div>
-
-                {/* Right: Local Commerce */}
-                <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm z-10 w-64 text-right">
-                  <div className="w-12 h-12 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center mb-4 ml-auto">
-                    <Landmark className="w-6 h-6" />
-                  </div>
-                  <h3 className="font-bold text-gray-900 mb-1">Local Merchant</h3>
-                  <p className="text-sm text-gray-500">Fiat Cash-out via MoneyGram</p>
-                </div>
+                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-4 leading-tight drop-shadow-sm">
+                   The standard for <br/> <span className="text-blue-600">crypto point-of-sale</span>
+                 </h1>
+              </div>
+            }
+          >
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+              <p className="text-2xl text-gray-700 mb-10 leading-relaxed font-medium">
+                Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <SpecularButton 
+                  as="a"
+                  href="/pos"
+                  className="text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0" 
+                >
+                  Start Free Trial
+                </SpecularButton>
+                <SpecularButton 
+                  as="a"
+                  href="#how-it-works"
+                  className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold"
+                  secondary
+                >
+                  View Documentation
+                </SpecularButton>
               </div>
             </div>
-          </div>
+          </ScrollExpand>
         </section>
 
         {/* Phase 2: Core Messaging & Mechanism */}
@@ -306,6 +295,19 @@ export default function LandingPage() {
           <p>&copy; {new Date().getFullYear()} HaloPaye Foundation. Open source software.</p>
         </div>
       </footer>
+      
+      {/* Page-level gradual blur overlay at the bottom of the viewport */}
+      <GradualBlur
+        target="page"
+        position="bottom"
+        height="6rem"
+        strength={2}
+        divCount={5}
+        curve="bezier"
+        exponential={true}
+        opacity={1}
+        zIndex={50}
+      />
     </div>
   );
 }
