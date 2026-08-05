@@ -24,13 +24,13 @@ export const StalenessIndicator: React.FC<StalenessIndicatorProps> = ({
   const isOnline = typeof window !== 'undefined' ? navigator.onLine : true;
 
   return (
-    <div className="w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm">
+    <div className="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] border border-gray-100">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold text-gray-900">
             1 USDC = {rate.toLocaleString()} {currency}
           </span>
-          <span className="text-xs font-bold uppercase tracking-wide bg-gray-100 text-gray-500 px-2 py-0.5 rounded">
+          <span className="text-xs font-bold uppercase tracking-wider bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md">
             {source}
           </span>
         </div>

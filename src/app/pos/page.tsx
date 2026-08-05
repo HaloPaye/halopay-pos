@@ -181,29 +181,15 @@ export default function POSPage() {
       />
 
       {/* Amount Entry Area */}
-      <main className="flex-1 flex flex-col justify-center space-y-6">
-        <div className="text-center px-4">
-          <div className="text-sm font-medium text-gray-500 mb-1">Charge Amount</div>
-          <div className="text-5xl font-extrabold tracking-tight text-gray-900 font-sans flex justify-center items-baseline gap-2">
+      <main className="flex-1 flex flex-col justify-center space-y-8 mt-4">
+        <div className="text-center px-4 flex flex-col items-center justify-center min-h-[160px]">
+          <div className="text-[3rem] font-extrabold tracking-tighter text-gray-900 leading-none flex justify-center items-baseline gap-2">
             <span>{numericAmount.toLocaleString('en-US')}</span>
-            <span className="text-2xl font-bold text-gray-400">{config.currency}</span>
+            <span className="text-2xl sm:text-3xl font-bold text-gray-400">{config.currency}</span>
           </div>
-          <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-sm font-medium border border-gray-200">
-            <Smartphone className="w-4 h-4 text-blue-500" />
-            <span>≈ {cryptoAmount.toFixed(2)} {config.assetCode}</span>
-          </div>
-          
-          {/* Presets */}
-          <div className="grid grid-cols-4 gap-2 mt-6">
-            {[500, 1000, 5000, 10000].map((preset) => (
-              <button
-                key={preset}
-                onClick={() => handleQuickAdd(preset)}
-                className="py-2 px-2 rounded-lg bg-white border border-gray-200 shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors"
-              >
-                +{preset >= 1000 ? `${preset / 1000}k` : preset}
-              </button>
-            ))}
+          <div className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100/80 text-gray-500 text-sm font-semibold border border-gray-200">
+            <Smartphone className="w-4 h-4 text-gray-400" />
+            <span>≈ {cryptoAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {config.assetCode}</span>
           </div>
         </div>
 
