@@ -31,21 +31,15 @@ export default function CtaSection() {
                       <SpecularButton 
                         as="a"
                         href="/pos" 
-                        size="md"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto text-base px-6 py-3 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md flex items-center justify-center gap-2"
                       >
-                        <Zap className="w-5 h-5 mr-2" />
+                        <Zap className="w-5 h-5" />
                         Launch Terminal
                       </SpecularButton>
                       <SpecularButton 
                         as="a"
                         href="https://github.com/HaloPaye" 
-                        size="md"
-                        tint="#1e3a8a"
-                        textColor="#ffffff"
-                        baseColor="#1e3a8a"
-                        lineColor="#60a5fa"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto text-base px-6 py-3 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md flex items-center justify-center"
                       >
                         View GitHub
                       </SpecularButton>
