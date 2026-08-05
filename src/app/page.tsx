@@ -35,7 +35,7 @@ export default function LandingPage() {
             textColor: "#ffffff",
             links: [
               { label: "POS Terminal", href: "/pos", ariaLabel: "Launch POS Terminal" },
-              { label: "Documentation", href: "http://localhost:3002", ariaLabel: "View Documentation" }
+              { label: "Documentation", href: "#how-it-works", ariaLabel: "View Documentation" }
             ]
           },
           {
@@ -85,13 +85,13 @@ export default function LandingPage() {
                 <SpecularButton 
                   as="a"
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md" 
+                  className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 font-bold border-0" 
                 >
                   Start Free Trial
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
-                  href="http://localhost:3002"
+                  href="#how-it-works"
                   className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
                 >
                   View Documentation
@@ -282,8 +282,8 @@ export default function LandingPage() {
           { href: "https://stellar.org/aid-assist", label: "Aid Assist" },
         ]}
         legalLinks={[
-          { href: "/privacy", label: "Privacy" },
-          { href: "/terms", label: "Terms" },
+          { href: "#", label: "Privacy" },
+          { href: "#", label: "Terms" },
         ]}
         copyright={{
           text: `© ${new Date().getFullYear()} HaloPaye Foundation`,
