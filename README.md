@@ -133,6 +133,10 @@ npm start
 
 * **HaloPay Dev Team** - devs@halopay.io
 
+## Contributors
+
+[![Contributors](https://contrib.rocks/image?repo=HaloPaye/halopay-pos)](https://github.com/HaloPaye/halopay-pos/graphs/contributors)
+
 ---
 
 ## License
