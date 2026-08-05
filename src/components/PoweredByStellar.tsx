@@ -95,7 +95,7 @@ export default function PoweredByStellar() {
         swirlIterations: 12,
         shape: "edge" as const,
         shapeScale: 0.12,
-        colors: ["hsl(200, 100%, 25%)", "hsl(180, 100%, 65%)", "hsl(160, 90%, 35%)", "hsl(190, 100%, 75%)"],
+        colors: ["hsl(220, 100%, 25%)", "hsl(210, 100%, 65%)", "hsl(230, 90%, 35%)", "hsl(200, 100%, 75%)"],
       },
       {
         proportion: 0.35,
@@ -142,11 +142,11 @@ export default function PoweredByStellar() {
   }
 
   return (
-    <section className="py-24 px-4 bg-transparent">
+    <section className="py-16 md:py-24 px-4 sm:px-6 bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">Powered by Stellar</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4 md:mb-6">Powered by Stellar</h2>
+          <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed font-medium">
             Built entirely on the Stellar network to deliver institutional-grade performance to local merchants.
           </p>
         </div>
@@ -174,12 +174,12 @@ export default function PoweredByStellar() {
                   />
                 </div>
 
-                <div className="relative z-10 p-8 rounded-[2.5rem] h-full flex flex-col bg-black/60 hover:bg-black/40 transition-colors duration-300 border border-white/20 shadow-xl backdrop-blur-[2px]">
-                  <div className="mb-6 filter drop-shadow-lg">{feature.icon}</div>
+                <div className="relative z-10 p-6 md:p-8 rounded-[2.5rem] h-full flex flex-col bg-black/60 hover:bg-black/40 transition-colors duration-300 border border-white/20 shadow-xl backdrop-blur-[2px]">
+                  <div className="mb-4 md:mb-6 filter drop-shadow-lg">{feature.icon}</div>
 
-                  <h3 className="text-2xl font-bold mb-4 text-white tracking-tight">{feature.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 tracking-tight">{feature.title}</h3>
 
-                  <p className="leading-relaxed flex-grow text-gray-100 font-medium text-sm lg:text-base">{feature.description}</p>
+                  <p className="text-blue-50 leading-relaxed text-base md:text-lg flex-grow font-medium">{feature.description}</p>
 
                   <a 
                     href={feature.link} 

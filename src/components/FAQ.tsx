@@ -42,13 +42,13 @@ export default function FAQ() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden bg-transparent text-neutral-900">
-      <section className="relative z-10 mx-auto flex max-w-4xl flex-col gap-12 px-6 py-24 lg:max-w-5xl lg:px-12">
+    <div className="relative w-full overflow-hidden bg-transparent text-white">
+      <section className="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 md:gap-12 px-4 sm:px-6 py-16 md:py-24 lg:max-w-5xl lg:px-12">
         <header className="flex flex-col gap-4 text-center md:text-left">
-          <h1 className="text-4xl font-extrabold leading-tight md:text-5xl text-neutral-900">
+          <h1 className="text-3xl font-extrabold leading-tight md:text-5xl text-white">
             Frequently Asked Questions
           </h1>
-          <p className="max-w-xl mx-auto md:mx-0 text-base lg:text-lg text-neutral-600">
+          <p className="max-w-xl mx-auto md:mx-0 text-sm md:text-base lg:text-lg text-neutral-600">
             Everything you need to know about adopting HaloPaye and securing your settlement pipelines.
           </p>
         </header>
@@ -62,7 +62,7 @@ export default function FAQ() {
             return (
               <li
                 key={item.question}
-                className="group relative overflow-hidden rounded-3xl border bg-white/70 backdrop-blur-md border-neutral-200 shadow-sm transition-all duration-500 hover:-translate-y-0.5 focus-within:-translate-y-0.5"
+                className="group relative overflow-hidden rounded-3xl border bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl shadow-blue-900/20 transition-all duration-500 hover:-translate-y-0.5 focus-within:-translate-y-0.5"
                 onMouseMove={setCardGlow}
                 onMouseLeave={clearCardGlow}
               >
@@ -81,14 +81,14 @@ export default function FAQ() {
                   aria-controls={panelId}
                   aria-expanded={open}
                   onClick={() => toggleQuestion(index)}
-                  className="relative flex w-full items-start gap-6 px-8 py-7 text-left transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-200"
+                  className="relative flex w-full items-start gap-4 sm:gap-6 px-5 py-6 sm:px-8 sm:py-7 text-left transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-200"
                 >
-                  <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-neutral-300 bg-neutral-900/5 transition-all duration-500 group-hover:scale-105 text-neutral-900">
+                  <span className="relative flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/5 transition-all duration-500 group-hover:scale-105 text-white">
                     <span
-                      className={`pointer-events-none absolute inset-0 rounded-full border opacity-30 border-neutral-300 ${open ? "animate-ping" : ""}`}
+                      className={`pointer-events-none absolute inset-0 rounded-full border opacity-30 border-white/40 ${open ? "animate-ping" : ""}`}
                     />
                     <svg
-                      className={`relative h-5 w-5 transition-transform duration-500 text-neutral-900 ${open ? "rotate-45" : ""}`}
+                      className={`relative h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-500 text-white ${open ? "rotate-45" : ""}`}
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -98,13 +98,13 @@ export default function FAQ() {
                     </svg>
                   </span>
 
-                  <div className="flex flex-1 flex-col gap-4">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 mt-2">
-                      <h2 className="text-lg font-bold leading-tight sm:text-xl text-neutral-900">
+                  <div className="flex flex-1 flex-col gap-3 sm:gap-4">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4 mt-1 sm:mt-2">
+                      <h2 className="text-base font-bold leading-tight sm:text-xl text-white">
                         {item.question}
                       </h2>
                       {item.meta && (
-                        <span className="inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto border-neutral-200 text-neutral-600">
+                        <span className="inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto border-white/20 text-blue-100">
                           {item.meta}
                         </span>
                       )}
