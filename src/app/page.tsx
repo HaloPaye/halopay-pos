@@ -6,6 +6,7 @@ import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
 import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
+import ScrollExpand from '@/components/ScrollExpand';
 
 export default function LandingPage() {
   return (
@@ -34,32 +35,49 @@ export default function LandingPage() {
       </nav>
 
       <main>
-        <section className="relative bg-white pt-32 pb-24 md:pt-48 md:pb-32 border-b border-gray-200 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6 leading-tight max-w-4xl mx-auto">
-               The standard for <br/> <span className="text-blue-600">crypto point-of-sale</span>
-             </h1>
-             <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed font-medium max-w-3xl mx-auto">
-               Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
-             </p>
-             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <section className="relative bg-[#f9fafb]">
+          <ScrollExpand
+            useWindowScroll
+            scrollHint="Scroll to explore"
+            startWidth={75}
+            startHeight={60}
+            mediaZoom={1.05}
+            childrenMedia={
+              <div className="w-full h-full bg-white relative overflow-hidden border border-gray-200">
+                {/* Clean white background, no strands */}
+              </div>
+            }
+            title={
+              <div className="flex flex-col items-center mt-[-5vh]">
+                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-4 leading-tight drop-shadow-sm">
+                   The standard for <br/> <span className="text-blue-600">crypto point-of-sale</span>
+                 </h1>
+              </div>
+            }
+          >
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+              <p className="text-2xl text-gray-700 mb-10 leading-relaxed font-medium">
+                Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <SpecularButton 
                   as="a"
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0 w-full sm:w-auto" 
+                  className="text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0" 
                 >
                   Start Free Trial
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
                   href="#how-it-works"
-                  className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold w-full sm:w-auto"
+                  className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold"
                   secondary
                 >
                   View Documentation
                 </SpecularButton>
-             </div>
-          </div>
+              </div>
+            </div>
+          </ScrollExpand>
         </section>
 
         {/* Phase 2: Core Messaging & Mechanism */}
