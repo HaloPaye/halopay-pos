@@ -7,6 +7,7 @@ import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
 import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
 import ScrollExpand from '@/components/ScrollExpand';
+import { Reveal } from '@/components/Reveal';
 
 export default function LandingPage() {
   return (
@@ -155,11 +156,16 @@ export default function LandingPage() {
 
         {/* Phase 2: How It Works */}
         <section id="how-it-works" className="py-24 bg-white border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">How it Works</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">A secure, resilient pipeline designed strictly for legitimate merchants.</p>
+          <Reveal>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">How it Works</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">A secure, resilient pipeline designed strictly for legitimate merchants.</p>
+              </div>
             </div>
+          </Reveal>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div className="w-full mx-auto relative mt-12 mb-32">
               <ScrollStack useWindowScroll={true}>
@@ -202,13 +208,18 @@ export default function LandingPage() {
 
         {/* Phase 3: Technical Integrity */}
         <section className="py-24 bg-gray-50 border-b border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Architecture Overview</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                HaloPaye targets true "no-rail" environments, serving as a complementary extension to the SDF stack where traditional payment rails do not exist.
-              </p>
+          <Reveal>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Architecture Overview</h2>
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                  HaloPaye targets true "no-rail" environments, serving as a complementary extension to the SDF stack where traditional payment rails do not exist.
+                </p>
+              </div>
             </div>
+          </Reveal>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-200 max-w-5xl mx-auto hidden md:block">
               {/* Technical Diagram SVG */}
@@ -262,13 +273,19 @@ export default function LandingPage() {
         </section>
 
         {/* Built on Stellar */}
-        <PoweredByStellar />
+        <Reveal direction="up" delay={0.2}>
+          <PoweredByStellar />
+        </Reveal>
 
         {/* Phase 3: FAQ */}
-        <FAQ />
+        <Reveal direction="up" delay={0.2}>
+          <FAQ />
+        </Reveal>
 
         {/* Phase 4: Final CTA */}
-        <CtaSection />
+        <Reveal direction="none" delay={0.2}>
+          <CtaSection />
+        </Reveal>
       </main>
 
       <footer className="bg-gray-900 py-12 text-center text-gray-500 text-sm border-t border-gray-800">
