@@ -93,7 +93,7 @@ export default function PoweredByStellar() {
         distortion: 0.2,
         swirl: 0.9,
         swirlIterations: 12,
-        shape: "dots" as const,
+        shape: "edge" as const,
         shapeScale: 0.12,
         colors: ["hsl(200, 100%, 25%)", "hsl(180, 100%, 65%)", "hsl(160, 90%, 35%)", "hsl(190, 100%, 75%)"],
       },
@@ -113,7 +113,7 @@ export default function PoweredByStellar() {
         distortion: 0.22,
         swirl: 0.8,
         swirlIterations: 15,
-        shape: "dots" as const,
+        shape: "edge" as const,
         shapeScale: 0.09,
         colors: ["hsl(215, 100%, 35%)", "hsl(205, 100%, 65%)", "hsl(225, 90%, 40%)", "hsl(195, 100%, 75%)"],
       },
@@ -133,7 +133,7 @@ export default function PoweredByStellar() {
         distortion: 0.19,
         swirl: 0.75,
         swirlIterations: 9,
-        shape: "dots" as const,
+        shape: "edge" as const,
         shapeScale: 0.13,
         colors: ["hsl(200, 100%, 30%)", "hsl(220, 100%, 60%)", "hsl(240, 90%, 35%)", "hsl(210, 100%, 75%)"],
       },
@@ -142,7 +142,7 @@ export default function PoweredByStellar() {
   }
 
   return (
-    <section className="py-24 px-4 bg-white border-t border-gray-200">
+    <section className="py-24 px-4 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">Powered by Stellar</h2>
@@ -156,6 +156,7 @@ export default function PoweredByStellar() {
             const shaderConfig = getShaderConfig(index)
             return (
               <div key={index} className="relative h-80 group">
+
                 <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-300">
                   <Warp
                     style={{ height: "100%", width: "100%" }}

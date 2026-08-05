@@ -81,6 +81,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const scrimRef = useRef<HTMLDivElement | null>(null);
   const hintRef = useRef<HTMLDivElement | null>(null);
+  const holeRef = useRef<SVGRectElement | null>(null);
 
   const propsRef = useRef<Required<Pick<ScrollExpandProps, ConfigKey>>>(
     {} as Required<Pick<ScrollExpandProps, ConfigKey>>
@@ -112,9 +113,14 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     const ix = Math.max(0, (100 - w) / 2);
     const iy = Math.max(0, (100 - h) / 2);
     const r = c.startRadius + (c.endRadius - c.startRadius) * e;
-    frame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${r}px)`;
-
-    media.style.transform = `scale(${c.mediaZoom + (1 - c.mediaZoom) * e})`;
+    
+    if (holeRef.current) {
+      holeRef.current.setAttribute('x', `${ix}%`);
+      holeRef.current.setAttribute('y', `${iy}%`);
+      holeRef.current.setAttribute('width', `${w}%`);
+      holeRef.current.setAttribute('height', `${h}%`);
+      holeRef.current.setAttribute('rx', `${r}`);
+    }
 
     if (scrimRef.current) scrimRef.current.style.opacity = `${c.overlayScrim * e}`;
 
@@ -250,7 +256,7 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     ) : (
       <div 
         ref={mediaRef as any}
-        className="absolute inset-0 w-full h-full origin-center select-none [will-change:transform] bg-white border border-gray-200"
+        className="absolute inset-0 w-full h-full origin-center select-none [will-change:transform]"
       >
         {/* We can place Strands inside the media component if no src is provided, allowing it to expand */}
         {childrenMedia}
@@ -266,24 +272,34 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     >
       <div ref={trackRef} className="relative w-full">
         <div ref={stageRef} className="sticky top-0 w-full overflow-hidden [--se-title-size:4rem]">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-[-1]">
+            <defs>
+              <mask id="hole-mask">
+                <rect width="100%" height="100%" fill="white" />
+                <rect ref={holeRef} x="29%" y="21%" width="42%" height="58%" rx="24" fill="black" />
+              </mask>
+            </defs>
+          </svg>
+
           <div
             ref={frameRef}
-            className="absolute inset-0 [clip-path:inset(21%_29%_21%_29%_round_24px)] [will-change:clip-path] shadow-2xl"
+            className="absolute inset-0 z-0"
+            style={{ WebkitMask: 'url(#hole-mask)', mask: 'url(#hole-mask)' }}
           >
             {media}
-            <div
-              ref={scrimRef}
-              className="absolute inset-0 opacity-0 pointer-events-none bg-[linear-gradient(to_top,rgba(255,255,255,0.75),rgba(255,255,255,0.1)_45%,rgba(255,255,255,0.35))]"
-            />
-            {children ? (
-              <div
-                ref={overlayRef}
-                className="absolute inset-0 flex flex-col items-center justify-center text-center p-[6%] opacity-0 [will-change:opacity,transform]"
-              >
-                {children}
-              </div>
-            ) : null}
           </div>
+          <div
+            ref={scrimRef}
+            className="absolute inset-0 opacity-0 pointer-events-none bg-[linear-gradient(to_top,rgba(255,255,255,0.75),rgba(255,255,255,0.1)_45%,rgba(255,255,255,0.35))] z-10"
+          />
+          {children ? (
+            <div
+              ref={overlayRef}
+              className="absolute inset-0 flex flex-col items-center justify-center text-center p-[6%] opacity-0 [will-change:opacity,transform] z-20 pointer-events-auto"
+            >
+              {children}
+            </div>
+          ) : null}
           {title ? (
             <div
               ref={titleRef}

@@ -42,7 +42,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden bg-gray-50 text-neutral-900 border-b border-gray-200">
+    <div className="relative w-full overflow-hidden bg-transparent text-neutral-900">
       <section className="relative z-10 mx-auto flex max-w-4xl flex-col gap-12 px-6 py-24 lg:max-w-5xl lg:px-12">
         <header className="flex flex-col gap-4 text-center md:text-left">
           <h1 className="text-4xl font-extrabold leading-tight md:text-5xl text-neutral-900">
@@ -62,7 +62,7 @@ export default function FAQ() {
             return (
               <li
                 key={item.question}
-                className="group relative overflow-hidden rounded-3xl border bg-white border-neutral-200 shadow-sm transition-all duration-500 hover:-translate-y-0.5 focus-within:-translate-y-0.5"
+                className="group relative overflow-hidden rounded-3xl border bg-white/70 backdrop-blur-md border-neutral-200 shadow-sm transition-all duration-500 hover:-translate-y-0.5 focus-within:-translate-y-0.5"
                 onMouseMove={setCardGlow}
                 onMouseLeave={clearCardGlow}
               >

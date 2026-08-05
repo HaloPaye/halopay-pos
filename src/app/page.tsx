@@ -8,10 +8,15 @@ import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
 import ScrollExpand from '@/components/ScrollExpand';
 import { Reveal } from '@/components/Reveal';
+import Velaris from '@/components/ui/velaris';
+import AuroraBackground from '@/components/ui/aurora-background';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-blue-100">
+    <div className="min-h-screen text-gray-900 font-sans selection:bg-blue-100 relative">
+      <div className="fixed inset-0 z-[-2]">
+        <Velaris />
+      </div>
       {/* Navbar */}
       <nav className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -36,18 +41,15 @@ export default function LandingPage() {
       </nav>
 
       <main>
-        <section className="relative bg-[#f9fafb]">
+        <section className="relative bg-transparent">
           <ScrollExpand
             useWindowScroll
             scrollHint="Scroll to explore"
             startWidth={75}
             startHeight={60}
-            mediaZoom={1.05}
-            childrenMedia={
-              <div className="w-full h-full bg-white relative overflow-hidden border border-gray-200">
-                {/* Clean white background, no strands */}
-              </div>
-            }
+            mediaZoom={1.0}
+            overlayScrim={0}
+            childrenMedia={<AuroraBackground variant="default" className="w-full h-full" />}
             title={
               <div className="flex flex-col items-center mt-[-5vh]">
                  <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-4 leading-tight drop-shadow-sm">
@@ -81,7 +83,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 2: Core Messaging & Mechanism */}
-        <section className="py-24 bg-gray-50 border-b border-gray-200">
+        <section className="py-24 bg-transparent">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
@@ -154,7 +156,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 2: How It Works */}
-        <section id="how-it-works" className="py-24 bg-white border-b border-gray-200">
+        <section id="how-it-works" className="py-24 bg-transparent">
           <Reveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
@@ -168,7 +170,7 @@ export default function LandingPage() {
 
             <div className="w-full mx-auto relative mt-12 mb-32">
               <ScrollStack useWindowScroll={true}>
-                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-blue-900/5 rounded-[2.5rem] p-10 lg:p-16">
                   <ProcessStep 
                     num="1" 
                     icon={<FileCheck className="w-10 h-10" />}
@@ -176,7 +178,7 @@ export default function LandingPage() {
                     desc="Merchants with valid government ID submit docs via halopay-api. Securely routed for standard 1–3 day SEP-12 KYC verification via MoneyGram."
                   />
                 </ScrollStackItem>
-                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-blue-900/5 rounded-[2.5rem] p-10 lg:p-16">
                   <ProcessStep 
                     num="2"
                     icon={<Smartphone className="w-10 h-10" />}
@@ -184,7 +186,7 @@ export default function LandingPage() {
                     desc="The PWA POS generates standard Stellar payment QR codes. Recipients pay instantly from their USDC Aid Assist balance."
                   />
                 </ScrollStackItem>
-                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-blue-900/5 rounded-[2.5rem] p-10 lg:p-16">
                   <ProcessStep 
                     num="3"
                     icon={<WifiOff className="w-10 h-10" />}
@@ -192,7 +194,7 @@ export default function LandingPage() {
                     desc="Generate QR codes even offline using securely cached exchange rates. The UI surfaces a clear staleness indicator when connectivity is low."
                   />
                 </ScrollStackItem>
-                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white border border-gray-200 shadow-xl shadow-gray-200/40 rounded-[2.5rem] p-10 lg:p-16">
+                <ScrollStackItem itemClassName="flex flex-col justify-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-blue-900/5 rounded-[2.5rem] p-10 lg:p-16">
                   <ProcessStep 
                     num="4"
                     icon={<Landmark className="w-10 h-10" />}
@@ -206,7 +208,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 3: Technical Integrity */}
-        <section className="py-24 bg-gray-50 border-b border-gray-200">
+        <section className="py-24 bg-transparent">
           <Reveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
@@ -220,7 +222,7 @@ export default function LandingPage() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-200 max-w-5xl mx-auto hidden md:block">
+            <div className="bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-lg border border-white/50 max-w-5xl mx-auto hidden md:block">
               {/* Technical Diagram SVG */}
               <div className="overflow-x-auto">
                 <svg className="w-full min-w-[700px] text-gray-900" viewBox="0 0 900 400" fill="none" xmlns="http://www.w3.org/2000/svg">
