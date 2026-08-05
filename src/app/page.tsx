@@ -72,7 +72,6 @@ export default function LandingPage() {
                   as="a"
                   href="#how-it-works"
                   className="text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold"
-                  secondary
                 >
                   View Documentation
                 </SpecularButton>
