@@ -35,7 +35,7 @@ export default function LandingPage() {
             textColor: "#ffffff",
             links: [
               { label: "POS Terminal", href: "/pos", ariaLabel: "Launch POS Terminal" },
-              { label: "Documentation", href: "#how-it-works", ariaLabel: "View Documentation" }
+              { label: "Documentation", href: "http://localhost:3002", ariaLabel: "View Documentation" }
             ]
           },
           {
@@ -85,13 +85,13 @@ export default function LandingPage() {
                 <SpecularButton 
                   as="a"
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 font-bold border-0" 
+                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md" 
                 >
                   Start Free Trial
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
-                  href="#how-it-works"
+                  href="http://localhost:3002"
                   className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
                 >
                   View Documentation
@@ -113,7 +113,7 @@ export default function LandingPage() {
                 <p className="text-lg text-blue-100 mb-6 leading-relaxed">
                   The SDF Disbursement Platform and Stellar Aid Assist have been a resounding success, surpassing <strong>$10M in lifetime disbursements</strong>. They have proven that digital delivery works at scale.
                 </p>
-                <div className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl border-l-4 border-l-white">
+                <div className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl">
                   <h4 className="font-bold text-white mb-2">The Counter Reality</h4>
                   <p className="text-blue-50">
                     Without a merchant network, recipients in "no-rail" environments (like Haiti, Syria, or Gambia) must immediately cash out their USDC, adding heavy friction, travel costs, and security risks. Unlike regions with advanced digital rails (e.g., Pix in Brazil), these crisis zones require a dedicated, offline-capable merchant acceptance layer to keep value digital until the very last mile.
@@ -282,8 +282,8 @@ export default function LandingPage() {
           { href: "https://stellar.org/aid-assist", label: "Aid Assist" },
         ]}
         legalLinks={[
-          { href: "#", label: "Privacy" },
-          { href: "#", label: "Terms" },
+          { href: "/privacy", label: "Privacy" },
+          { href: "/terms", label: "Terms" },
         ]}
         copyright={{
           text: `© ${new Date().getFullYear()} HaloPaye Foundation`,
