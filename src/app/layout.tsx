@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description: 'Instant offline-ready crypto POS terminal for merchants. Converts fiat to USDC over Stellar SEP-0007 protocol.',
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/icon-192.png',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
