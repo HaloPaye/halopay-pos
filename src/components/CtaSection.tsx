@@ -4,10 +4,10 @@ import SpecularButton from './SpecularButton';
 
 export default function CtaSection() {
   return (
-    <section className="py-24 bg-white border-b border-gray-200">
+    <section className="py-24 bg-transparent">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div>
-          <div className="bg-gray-50 overflow-hidden border border-gray-200 rounded-3xl py-12 lg:py-16 shadow-sm">
+          <div className="bg-white/60 backdrop-blur-lg overflow-hidden border border-white/40 rounded-3xl py-12 lg:py-16 shadow-lg">
             <div className="gap-0 px-6 lg:px-12">
               <div className="grid gap-12 lg:grid-cols-2">
                 {/* Left Content */}
@@ -55,7 +55,7 @@ export default function CtaSection() {
 
                 {/* Right Content */}
                 <div className="flex flex-col gap-6">
-                  <a href="https://github.com/HaloPaye/halopay-pos" target="_blank" rel="noreferrer" className="group block bg-white border border-gray-200 rounded-2xl p-6 transition-colors hover:border-blue-300 shadow-sm hover:shadow-md">
+                  <a href="https://github.com/HaloPaye/halopay-pos" target="_blank" rel="noreferrer" className="group block bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl p-6 transition-colors hover:border-blue-300 shadow-sm hover:shadow-md">
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
@@ -72,7 +72,7 @@ export default function CtaSection() {
                     </div>
                   </a>
 
-                  <a href="https://github.com/HaloPaye/halopay-api" target="_blank" rel="noreferrer" className="group block bg-white border border-gray-200 rounded-2xl p-6 transition-colors hover:border-blue-300 shadow-sm hover:shadow-md">
+                  <a href="https://github.com/HaloPaye/halopay-api" target="_blank" rel="noreferrer" className="group block bg-white/80 backdrop-blur-md border border-white/50 rounded-2xl p-6 transition-colors hover:border-blue-300 shadow-sm hover:shadow-md">
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
