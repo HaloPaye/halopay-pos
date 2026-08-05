@@ -5,6 +5,7 @@ import FAQ from '@/components/FAQ';
 import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
 import SpecularButton from '@/components/SpecularButton';
+import PoweredByStellar from '@/components/PoweredByStellar';
 
 export default function LandingPage() {
   return (
@@ -287,59 +288,7 @@ export default function LandingPage() {
         </section>
 
         {/* Built on Stellar */}
-        <section id="stellar" className="py-24 bg-gray-900 text-white border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500/10 rounded-2xl mb-6">
-                <Rocket className="w-8 h-8 text-blue-400" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Powered by the Stellar Network</h2>
-              <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                HaloPaye is an open-source product deeply integrated into the Stellar ecosystem, leveraging SEP standards for KYC and frictionless settlement.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
-              <div className="bg-gray-800 p-6 rounded-2xl border border-gray-700">
-                <div className="text-blue-400 font-bold mb-2">SEP-10 & SEP-12</div>
-                <p className="text-sm text-gray-400">Streamlined authentication and KYC standard ensuring regulatory compliance across borders.</p>
-              </div>
-              <div className="bg-gray-800 p-6 rounded-2xl border border-gray-700">
-                <div className="text-emerald-400 font-bold mb-2">SEP-24 Settlement</div>
-                <p className="text-sm text-gray-400">Automated interactive fiat deposit and withdrawal connections directly to MoneyGram locations.</p>
-              </div>
-              <div className="bg-gray-800 p-6 rounded-2xl border border-gray-700">
-                <div className="text-purple-400 font-bold mb-2">SEP-0007 QR Codes</div>
-                <p className="text-sm text-gray-400">Delegated, standard-compliant URI scheme for immediate, interoperable payments from any Stellar wallet.</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <SpecularButton 
-                as="a"
-                href="https://github.com/HaloPaye/halopay-pos" 
-                size="md"
-                tint="#ffffff"
-                textColor="#111827"
-                baseColor="#374151"
-                lineColor="#3b82f6"
-              >
-                View POS Source <ArrowRight className="w-4 h-4 ml-2" />
-              </SpecularButton>
-              <SpecularButton 
-                as="a"
-                href="https://github.com/HaloPaye/halopay-api" 
-                size="md"
-                tint="#ffffff"
-                textColor="#111827"
-                baseColor="#374151"
-                lineColor="#3b82f6"
-              >
-                View API Source <ArrowRight className="w-4 h-4 ml-2" />
-              </SpecularButton>
-            </div>
-          </div>
-        </section>
+        <PoweredByStellar />
 
         {/* Phase 3: FAQ */}
         <FAQ />
