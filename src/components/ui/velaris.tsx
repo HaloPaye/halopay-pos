@@ -75,7 +75,8 @@ void main() {
   float glow = smoothstep(0.8, 0.0, dist) * 0.3;
   col += u_colors[1] * glow;
 
-  col = mix(col * 0.2, col, vignette);
+  // Mix slightly to background color at edges instead of black
+  col = mix(u_bg, col, vignette);
 
   float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453 + u_time);
   col += (grain - 0.5) * u_grain * 0.1;
@@ -94,10 +95,10 @@ export interface VelarisProps {
   children?: React.ReactNode;
 }
 
-const DEFAULT_COLORS = ["#2563eb", "#60a5fa", "#ffffff", "#dbeafe"];
+const DEFAULT_COLORS = ["#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd"];
 
 export const Velaris = ({
-  bg = "#ffffff",
+  bg = "#2563eb",
   colors = DEFAULT_COLORS,
   speed = 1.5,
   grain = 0.05,

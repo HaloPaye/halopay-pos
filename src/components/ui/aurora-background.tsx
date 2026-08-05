@@ -18,8 +18,8 @@ interface AuroraBackgroundProps {
 const VARIANTS: Record<AuroraVariant, [string, string, string][]> = {
   custom: [],
   default: [
-    ["hsla(260, 70%, 60%, 0.4)", "hsla(280, 60%, 50%, 0.2)", "transparent"],
-    ["hsla(320, 80%, 70%, 0.3)", "transparent", "transparent"],
+    ["hsla(220, 100%, 50%, 0.6)", "hsla(210, 100%, 60%, 0.3)", "transparent"],
+    ["hsla(200, 100%, 40%, 0.5)", "transparent", "transparent"],
   ],
   ember: [
     ["hsla(25, 95%, 55%, 0.5)", "hsla(0, 90%, 50%, 0.3)", "transparent"],
