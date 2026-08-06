@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const vertexShaderGLSL = `
@@ -108,6 +108,7 @@ export const Velaris = ({
 }: VelarisProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const hexToRgb = (hex: string): [number, number, number] => {
     const h = hex.replace("#", "");
@@ -187,6 +188,7 @@ export const Velaris = ({
     };
 
     raf = requestAnimationFrame(render);
+    setIsLoaded(true);
     return () => {
       ro.disconnect();
       cancelAnimationFrame(raf);
@@ -201,7 +203,10 @@ export const Velaris = ({
     >
       <canvas
         ref={canvasRef}
-        className="pointer-events-none absolute inset-0 h-full w-full"
+        className={cn(
+          "pointer-events-none absolute inset-0 h-full w-full transition-opacity duration-1000",
+          isLoaded ? "opacity-100" : "opacity-0"
+        )}
       />
       <div className="relative z-10 h-full w-full">{children}</div>
     </div>

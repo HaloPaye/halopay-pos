@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: '#3b82f6',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -34,7 +34,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-gray-50 text-gray-900 min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
+      <body className="antialiased bg-[#3b82f6] text-slate-50 min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
         <div style={{ display: 'none' }} dangerouslySetInnerHTML={{ __html: `<!--
 THESIS: A highly polished, hyper-reliable POS terminal matching Stripe Terminal and Square POS standards, refusing the neon crypto-wallet default.
 OWN-WORLD: Minimalist, stark white backgrounds, soft drop shadows, clean borders, high-contrast typography, and a prominent blue or brand-colored primary action.

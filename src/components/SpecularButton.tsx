@@ -28,6 +28,8 @@ export interface SpecularButtonProps {
   type?: 'button' | 'submit' | 'reset';
   as?: any;
   href?: string;
+  hideCssShadow?: boolean;
+  hideBaseStroke?: boolean;
 }
 
 interface ShaderProps {
@@ -42,6 +44,7 @@ interface ShaderProps {
   followMouse: boolean;
   proximity: number;
   autoAnimate: boolean;
+  hideBaseStroke: boolean;
 }
 
 const PAD = 20;
@@ -74,6 +77,7 @@ uniform float uShineSize;
 uniform float uShineFade;
 uniform float uThickness;
 uniform float uBaseWidth;
+uniform float uHideBaseStroke;
 
 out vec4 fragColor;
 
@@ -96,7 +100,7 @@ void main() {
   vec2 L = vec2(cos(uAngle), sin(uAngle));
 
   // Dark base stroke hugging the edge for a sense of thickness
-  float base = (1.0 - smoothstep(0.0, uBaseWidth, abs(d))) * 0.45;
+  float base = (1.0 - smoothstep(0.0, uBaseWidth, abs(d))) * 0.45 * (1.0 - uHideBaseStroke);
 
   // Symmetric specular: the edges facing toward/away from the light both
   // catch a streak. The angular window (size + fade) is measured with an
@@ -137,13 +141,15 @@ const SpecularButton = ({
   className = '',
   type = 'button',
   as: Component = 'button',
-  href
+  href,
+  hideCssShadow = false,
+  hideBaseStroke = false
 }: SpecularButtonProps) => {
   const btnRef = useRef<HTMLElement>(null);
   const fxRef = useRef<HTMLSpanElement>(null);
   const propsRef = useRef<ShaderProps>({} as ShaderProps);
 
-  propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
+  propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate, hideBaseStroke };
 
   useEffect(() => {
     const btn = btnRef.current;
@@ -175,6 +181,7 @@ const SpecularButton = ({
         uShineSize: { value: 0.17 },
         uShineFade: { value: 0.7 },
         uThickness: { value: 1 },
+        uHideBaseStroke: { value: 0 },
 
         uBaseWidth: { value: dpr }
       }
@@ -254,6 +261,7 @@ const SpecularButton = ({
       program.uniforms.uShineSize.value = (p.shineSize * Math.PI) / 180;
       program.uniforms.uShineFade.value = (p.shineFade * Math.PI) / 180;
       program.uniforms.uThickness.value = p.thickness * dpr;
+      program.uniforms.uHideBaseStroke.value = p.hideBaseStroke ? 1.0 : 0.0;
       renderer.render({ scene: mesh });
     };
     raf = requestAnimationFrame(update);
@@ -274,7 +282,7 @@ const SpecularButton = ({
       href={href}
       disabled={disabled}
       onClick={onClick}
-      className={`relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-bold leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.15)] focus-visible:outline-2 focus-visible:outline-offset-[3px] ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`}
+      className={`relative m-0 inline-flex cursor-pointer items-center justify-center border-none font-bold leading-none tracking-[0.01em] outline-none transition-transform duration-150 active:scale-[0.97] disabled:cursor-default disabled:opacity-55 disabled:active:scale-100 [color:var(--sb-text-color)] [border-radius:var(--sb-radius)] [background:color-mix(in_srgb,var(--sb-tint)_calc(var(--sb-tint-opacity)*100%),transparent)] [backdrop-filter:blur(var(--sb-blur))] focus-visible:outline-2 focus-visible:outline-offset-[3px] ${hideCssShadow ? '' : 'shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_8px_24px_rgba(0,0,0,0.15)] '} ${SIZES[size] || SIZES.md}${className ? ` ${className}` : ''}`}
       style={
         {
           '--sb-radius': `${radius}px`,

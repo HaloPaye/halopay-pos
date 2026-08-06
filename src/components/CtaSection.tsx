@@ -31,6 +31,8 @@ export default function CtaSection() {
                       <SpecularButton 
                         as="a"
                         href="/pos" 
+                        hideCssShadow={true}
+                        hideBaseStroke={true}
                         className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md w-full sm:w-auto"
                       >
                         Launch Terminal
@@ -38,6 +40,8 @@ export default function CtaSection() {
                       <SpecularButton 
                         as="a"
                         href="https://github.com/HaloPaye" 
+                        hideCssShadow={true}
+                        hideBaseStroke={true}
                         className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md w-full sm:w-auto"
                       >
                         View GitHub
