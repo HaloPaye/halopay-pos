@@ -1,6 +1,6 @@
 import React from 'react';
 import { Zap, Rocket, Smartphone, ShieldCheck, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import SpecularButton from './SpecularButton';
 
 export default function CtaSection() {
   return (
@@ -28,19 +28,20 @@ export default function CtaSection() {
                     </div>
 
                     <div className="flex flex-col gap-3 sm:flex-row mt-4">
-                      <Link 
+                      <SpecularButton 
+                        as="a"
                         href="/pos" 
-                        className="w-full sm:w-auto flex items-center justify-center text-base px-8 py-4 bg-blue-600/90 text-white border border-blue-400/50 hover:bg-blue-500 font-bold backdrop-blur-md rounded-xl transition-colors shadow-lg shadow-blue-900/20"
+                        className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md w-full sm:w-auto"
                       >
-                        <Zap className="w-5 h-5 mr-2" />
                         Launch Terminal
-                      </Link>
-                      <a 
+                      </SpecularButton>
+                      <SpecularButton 
+                        as="a"
                         href="https://github.com/HaloPaye" 
-                        className="w-full sm:w-auto flex items-center justify-center text-base px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md rounded-xl transition-colors"
+                        className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md w-full sm:w-auto"
                       >
                         View GitHub
-                      </a>
+                      </SpecularButton>
                     </div>
                   </div>
                 </div>
