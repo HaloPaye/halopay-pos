@@ -1,5 +1,6 @@
 import React from 'react';
-import { Zap, Rocket, Smartphone, ShieldCheck, ArrowRight, Github } from 'lucide-react';
+import { Zap, Rocket, Smartphone, ShieldCheck, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CtaSection() {
   return (
@@ -27,18 +28,17 @@ export default function CtaSection() {
                     </div>
 
                     <div className="flex flex-col gap-3 sm:flex-row mt-4">
-                      <a 
+                      <Link 
                         href="/pos" 
-                        className="w-full sm:w-auto inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm gap-2"
+                        className="w-full sm:w-auto flex items-center justify-center text-base px-8 py-4 bg-blue-600/90 text-white border border-blue-400/50 hover:bg-blue-500 font-bold backdrop-blur-md rounded-xl transition-colors shadow-lg shadow-blue-900/20"
                       >
-                        <Zap className="w-5 h-5" />
+                        <Zap className="w-5 h-5 mr-2" />
                         Launch Terminal
-                      </a>
+                      </Link>
                       <a 
                         href="https://github.com/HaloPaye" 
-                        className="w-full sm:w-auto inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm gap-2"
+                        className="w-full sm:w-auto flex items-center justify-center text-base px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md rounded-xl transition-colors"
                       >
-                        <Github className="w-5 h-5" />
                         View GitHub
                       </a>
                     </div>
