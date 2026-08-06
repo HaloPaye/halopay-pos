@@ -4,6 +4,7 @@ import { ArrowRight, Globe2, ShieldCheck, Smartphone, WifiOff, FileCheck, Landma
 import FAQ from '@/components/FAQ';
 import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
+import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
 import ScrollExpand from '@/components/ScrollExpand';
 import { Reveal } from '@/components/Reveal';
@@ -81,18 +82,20 @@ export default function LandingPage() {
                 Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <Link 
+                <SpecularButton 
+                  as="a"
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-blue-600/90 text-white border border-blue-400/50 hover:bg-blue-500 font-bold backdrop-blur-md rounded-xl transition-colors text-center shadow-lg shadow-blue-900/20" 
+                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md" 
                 >
                   Start Free Trial
-                </Link>
-                <a 
+                </SpecularButton>
+                <SpecularButton 
+                  as="a"
                   href="http://localhost:3002"
-                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md rounded-xl transition-colors text-center"
+                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
                 >
                   View Documentation
-                </a>
+                </SpecularButton>
               </div>
             </div>
           </ScrollExpand>
@@ -110,7 +113,7 @@ export default function LandingPage() {
                 <p className="text-lg text-blue-100 mb-6 leading-relaxed">
                   The SDF Disbursement Platform and Stellar Aid Assist have been a resounding success, surpassing <strong>$10M in lifetime disbursements</strong>. They have proven that digital delivery works at scale.
                 </p>
-                <div className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl">
+                <div className="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl border-l-4 border-l-white">
                   <h4 className="font-bold text-white mb-2">The Counter Reality</h4>
                   <p className="text-blue-50">
                     Without a merchant network, recipients in "no-rail" environments (like Haiti, Syria, or Gambia) must immediately cash out their USDC, adding heavy friction, travel costs, and security risks. Unlike regions with advanced digital rails (e.g., Pix in Brazil), these crisis zones require a dedicated, offline-capable merchant acceptance layer to keep value digital until the very last mile.
