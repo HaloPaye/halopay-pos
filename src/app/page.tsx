@@ -177,7 +177,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 2: How It Works */}
-        <section id="how-it-works" className="py-16 md:py-24 bg-transparent">
+        <section id="how-it-works" className="pt-16 md:pt-24 pb-4 md:pb-8 bg-transparent">
           <Reveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12 md:mb-16">
@@ -188,8 +188,7 @@ export default function LandingPage() {
           </Reveal>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div className="w-full mx-auto relative mt-8 md:mt-12 mb-8">
+            <div className="w-full mx-auto relative mt-8 md:mt-12">
               <ScrollStack useWindowScroll={true}>
                 <ScrollStackItem itemClassName="flex flex-col justify-center bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl shadow-blue-900/20 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 lg:p-16">
                   <ProcessStep 
@@ -229,7 +228,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 3: Technical Integrity */}
-        <section className="pt-8 pb-24 bg-transparent">
+        <section className="pt-4 pb-24 bg-transparent">
           <Reveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">

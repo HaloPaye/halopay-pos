@@ -81,7 +81,7 @@ export default function ArchitectureDiagram() {
 
           {/* Nodes via foreignObject */}
           <DesktopNode x={80} y={150} icon={Smartphone} color="#60A5FA" title="halopay-pos" sub="PWA Terminal" delay="0s" badges={[{ icon: Cpu, label: "React" }]} />
-          <DesktopNode x={400} y={150} icon={Server} color="#3B82F6" title="halopay-api" sub="Settlement Engine" delay="0.5s" badges={[{ icon: Database, label: "Express" }, { icon: ShieldCheck, label: "Secure" }]} />
+          <DesktopNode x={400} y={150} icon={Server} color="#3B82F6" title="halopay-api" sub="Settlement Engine" delay="0.5s" badges={[{ icon: Database, label: "Express" }, { icon: ShieldCheck, label: "Secure" }]} badgePosition="-bottom-10" />
           <DesktopNode x={720} y={40} icon={Globe2} color="#818CF8" title="Stellar Horizon" sub="Global Mainnet" delay="1s" badges={[{ icon: Activity, label: "Consensus" }]} />
           <DesktopNode x={720} y={260} icon={Landmark} color="#34D399" title="MoneyGram Anchor" sub="Cash Out Rail" delay="1.5s" badges={[{ icon: ShieldCheck, label: "SEP-24" }]} />
         </svg>
@@ -119,7 +119,7 @@ export default function ArchitectureDiagram() {
   );
 }
 
-function DesktopNode({ x, y, icon: Icon, color, title, sub, delay, badges = [] }: any) {
+function DesktopNode({ x, y, icon: Icon, color, title, sub, delay, badges = [], badgePosition = "-bottom-4" }: any) {
   return (
     <foreignObject x={x} y={y} width="200" height="200" className="overflow-visible">
       {/* We center the 160x160 card inside the 200x200 foreignObject to allow room for animations and badges */}
@@ -140,7 +140,7 @@ function DesktopNode({ x, y, icon: Icon, color, title, sub, delay, badges = [] }
 
           {/* Mini floating badges */}
           {badges.length > 0 && (
-            <div className="absolute -bottom-4 flex flex-wrap justify-center gap-1.5 z-20 w-full px-2">
+            <div className={`absolute ${badgePosition} flex flex-wrap justify-center gap-1.5 z-20 w-full px-2`}>
               {badges.map((b: any, i: number) => (
                 <div key={i} className="flex items-center gap-1 bg-[#1e293b] border border-white/10 px-2 py-1 rounded-md shadow-lg">
                   <b.icon className="w-3 h-3 text-gray-300" />
