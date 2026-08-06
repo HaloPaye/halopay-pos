@@ -13,10 +13,12 @@ import AuroraBackground from '@/components/ui/aurora-background';
 import CardNav from '@/components/ui/CardNav';
 import { Footer } from '@/components/ui/footer';
 import ArchitectureDiagram from '@/components/ArchitectureDiagram';
+import SplashOverlay from '@/components/SplashOverlay';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen text-white font-sans selection:bg-blue-300 relative">
+    <div className="min-h-screen bg-[#2563eb] text-white font-sans selection:bg-blue-300 relative">
+      <SplashOverlay />
       <div className="fixed inset-0 z-[-2]">
         <Velaris />
       </div>

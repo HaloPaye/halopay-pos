@@ -137,7 +137,7 @@ export default function POSPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between max-w-md mx-auto p-4 sm:p-6 space-y-4 bg-gray-50">
+    <div className="min-h-screen flex flex-col justify-between max-w-md mx-auto p-4 sm:p-6 space-y-4 bg-gray-50 text-gray-900">
       {/* Header */}
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-3">

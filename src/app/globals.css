@@ -8,8 +8,6 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
   min-height: 100vh;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
