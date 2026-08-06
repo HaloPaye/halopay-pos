@@ -34,7 +34,7 @@ export default function LandingPage() {
             textColor: "#ffffff",
             links: [
               { label: "POS Terminal", href: "/pos", ariaLabel: "Launch POS Terminal" },
-              { label: "Documentation", href: "#how-it-works", ariaLabel: "View Documentation" }
+              { label: "Documentation", href: "http://localhost:3002", ariaLabel: "View Documentation" }
             ]
           },
           {
@@ -81,15 +81,15 @@ export default function LandingPage() {
                 Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a 
+                <Link 
                   href="/pos"
-                  className="inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0" 
+                  className="text-lg px-8 py-4 bg-blue-600/90 text-white border border-blue-400/50 hover:bg-blue-500 font-bold backdrop-blur-md rounded-xl transition-colors text-center shadow-lg shadow-blue-900/20" 
                 >
                   Start Free Trial
-                </a>
+                </Link>
                 <a 
-                  href="#how-it-works"
-                  className="inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm"
+                  href="http://localhost:3002"
+                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md rounded-xl transition-colors text-center"
                 >
                   View Documentation
                 </a>
