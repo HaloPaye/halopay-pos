@@ -55,7 +55,7 @@ export default function LandingPage() {
             textColor: "#ffffff",
             links: [
               { label: "Stellar SDF", href: "https://stellar.org", ariaLabel: "Stellar Development Foundation" },
-              { label: "Aid Assist", href: "https://stellar.org/aid-assist", ariaLabel: "Stellar Aid Assist" }
+              { label: "Aid Assist", href: "https://stellar.org/use-cases/stellar-for-aid", ariaLabel: "Stellar Aid Assist" }
             ]
           }
         ]}
@@ -280,7 +280,7 @@ export default function LandingPage() {
           { href: "/pos", label: "Terminal" },
           { href: "#how-it-works", label: "How it works" },
           { href: "https://stellar.org", label: "Stellar" },
-          { href: "https://stellar.org/aid-assist", label: "Aid Assist" },
+          { href: "https://stellar.org/use-cases/stellar-for-aid", label: "Aid Assist" },
         ]}
         legalLinks={[
           { href: "/privacy", label: "Privacy" },
