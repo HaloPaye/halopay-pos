@@ -4,7 +4,6 @@ import { ArrowRight, Globe2, ShieldCheck, Smartphone, WifiOff, FileCheck, Landma
 import FAQ from '@/components/FAQ';
 import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
-import SpecularButton from '@/components/SpecularButton';
 import PoweredByStellar from '@/components/PoweredByStellar';
 import ScrollExpand from '@/components/ScrollExpand';
 import { Reveal } from '@/components/Reveal';
@@ -82,20 +81,18 @@ export default function LandingPage() {
                 Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <SpecularButton 
-                  as="a"
+                <a 
                   href="/pos"
-                  className="text-lg px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 font-bold border-0" 
+                  className="inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-blue-600 text-white hover:bg-blue-700 font-bold border-0" 
                 >
                   Start Free Trial
-                </SpecularButton>
-                <SpecularButton 
-                  as="a"
+                </a>
+                <a 
                   href="#how-it-works"
-                  className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
+                  className="inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm"
                 >
                   View Documentation
-                </SpecularButton>
+                </a>
               </div>
             </div>
           </ScrollExpand>
@@ -282,8 +279,8 @@ export default function LandingPage() {
           { href: "https://stellar.org/aid-assist", label: "Aid Assist" },
         ]}
         legalLinks={[
-          { href: "#", label: "Privacy" },
-          { href: "#", label: "Terms" },
+          { href: "/privacy", label: "Privacy" },
+          { href: "/terms", label: "Terms" },
         ]}
         copyright={{
           text: `© ${new Date().getFullYear()} HaloPaye Foundation`,
