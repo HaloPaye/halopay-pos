@@ -45,10 +45,10 @@ export default function FAQ() {
     <div className="relative w-full overflow-hidden bg-transparent text-white">
       <section className="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 md:gap-12 px-4 sm:px-6 py-16 md:py-24 lg:max-w-5xl lg:px-12">
         <header className="flex flex-col gap-4 text-center md:text-left">
-          <h1 className="text-3xl font-extrabold leading-tight md:text-5xl text-white">
+          <h1 className="text-4xl font-extrabold leading-tight md:text-5xl tracking-tight text-white">
             Frequently Asked Questions
           </h1>
-          <p className="max-w-xl mx-auto md:mx-0 text-sm md:text-base lg:text-lg text-neutral-600">
+          <p className="max-w-xl mx-auto md:mx-0 text-base lg:text-lg text-blue-100/70">
             Everything you need to know about adopting HaloPaye and securing your settlement pipelines.
           </p>
         </header>
@@ -100,11 +100,11 @@ export default function FAQ() {
 
                   <div className="flex flex-1 flex-col gap-3 sm:gap-4">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4 mt-1 sm:mt-2">
-                      <h2 className="text-base font-bold leading-tight sm:text-xl text-white">
+                      <h2 className="text-lg font-semibold leading-tight sm:text-xl text-white">
                         {item.question}
                       </h2>
                       {item.meta && (
-                        <span className="inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.25em] transition-opacity duration-300 sm:ml-auto border-white/20 text-blue-100">
+                        <span className="inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-widest transition-opacity duration-300 sm:ml-auto border-white/20 text-blue-200/90 bg-white/5">
                           {item.meta}
                         </span>
                       )}
@@ -114,7 +114,7 @@ export default function FAQ() {
                       id={panelId}
                       role="region"
                       aria-labelledby={buttonId}
-                      className={`overflow-hidden text-base leading-relaxed transition-[max-height] duration-500 ease-out text-neutral-600 ${
+                      className={`overflow-hidden text-base leading-relaxed transition-[max-height] duration-500 ease-out text-blue-50/80 ${
                         open ? "max-h-64" : "max-h-0"
                       }`}
                     >
