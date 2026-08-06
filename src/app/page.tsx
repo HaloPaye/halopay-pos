@@ -37,7 +37,7 @@ export default function LandingPage() {
             textColor: "#ffffff",
             links: [
               { label: "POS Terminal", href: "/pos", ariaLabel: "Launch POS Terminal" },
-              { label: "Documentation", href: "http://localhost:3002", ariaLabel: "View Documentation" }
+              { label: "Documentation", href: "https://halopay-docs.vercel.app", ariaLabel: "View Documentation" }
             ]
           },
           {
@@ -93,7 +93,7 @@ export default function LandingPage() {
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
-                  href="http://localhost:3002"
+                  href="https://halopay-docs.vercel.app"
                   className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
                 >
                   View Documentation
