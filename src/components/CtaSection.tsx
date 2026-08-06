@@ -1,6 +1,5 @@
 import React from 'react';
 import { Zap, Rocket, Smartphone, ShieldCheck, ArrowRight, Github } from 'lucide-react';
-import SpecularButton from './SpecularButton';
 
 export default function CtaSection() {
   return (
@@ -28,22 +27,20 @@ export default function CtaSection() {
                     </div>
 
                     <div className="flex flex-col gap-3 sm:flex-row mt-4">
-                      <SpecularButton 
-                        as="a"
+                      <a 
                         href="/pos" 
-                        className="w-full sm:w-auto text-lg px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 font-bold border-0 flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm gap-2"
                       >
                         <Zap className="w-5 h-5" />
                         Launch Terminal
-                      </SpecularButton>
-                      <SpecularButton 
-                        as="a"
+                      </a>
+                      <a 
                         href="https://github.com/HaloPaye" 
-                        className="w-full sm:w-auto text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md flex items-center justify-center gap-2"
+                        className="w-full sm:w-auto inline-flex items-center justify-center rounded-full transition-transform duration-150 active:scale-[0.97] text-lg px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 font-bold shadow-sm gap-2"
                       >
                         <Github className="w-5 h-5" />
                         View GitHub
-                      </SpecularButton>
+                      </a>
                     </div>
                   </div>
                 </div>
