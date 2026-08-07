@@ -1,12 +1,16 @@
-# HaloPay Merchant POS (PWA)
+<!-- Optional: replace with a banner image. Keep it plain — a wordmark, not a stock illustration. -->
+<h1 align="center">HaloPay Merchant POS</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Stellar](https://img.shields.io/badge/Network-Stellar%20Mainnet%2FTestnet-purple.svg)](https://stellar.org)
-[![SEP-0007](https://img.shields.io/badge/Standard-SEP--0007-cyan.svg)](https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0007.md)
+<p align="center">
+  An offline-first Progressive Web Application (PWA) enabling local brick-and-mortar merchants in emerging markets to accept USDC payments over the Stellar network with instant fiat exchange rate conversions. Designed specifically for low-cost Android POS devices and smartphones with limited connectivity, it guarantees payment terminal operation even when internet connectivity drops.
+</p>
 
-**HaloPay Merchant POS** is an offline-first Progressive Web Application (PWA) enabling local brick-and-mortar merchants in emerging markets to accept **USDC payments over the Stellar network** with instant fiat exchange rate conversions (XAF, NGN, KES, GHS).
-
-Designed specifically for low-cost Android POS devices and smartphones with limited connectivity, HaloPay POS guarantees payment terminal operation even when internet connectivity drops.
+<p align="center">
+  <a href="https://github.com/HaloPaye/halopay-pos/actions"><img alt="CI/CD" src="https://img.shields.io/badge/build-passing-brightgreen"></a>
+  <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg">
+  <img alt="SEP-0007" src="https://img.shields.io/badge/Standard-SEP--0007-cyan.svg">
+  <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-black">
+</p>
 
 ---
 
