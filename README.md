@@ -23,6 +23,15 @@
 * **PWA Service Worker**: Full app shell pre-caching and offline capability via `manifest.json` and `sw.js`.
 * **Merchant Configuration**: Easily update merchant name, Stellar public key, base fiat currency, USDC issuer address, and WebSocket endpoint.
 
+### Deep Dive: Offline-First Architecture
+
+The defining feature of HaloPay POS is its ability to operate completely isolated from the internet during point-of-sale interactions. 
+
+- **Service Worker Caching**: All UI components, fonts, and scripts are aggressively cached by a PWA service worker. The terminal can be launched from a mobile home screen even with cellular data completely turned off.
+- **Algorithmic Rate Staleness**: The application caches the latest XAF/USDC exchange rate in `localStorage`. If the network is unavailable, the application uses this cached rate to calculate the exact crypto equivalent of the merchant's fiat price. A built-in staleness algorithm warns the merchant if the cached rate has drifted past 24 hours, mitigating severe volatility risk.
+- **Deterministic URI Generation**: When the merchant generates a QR code, the application relies on the SEP-0007 specification. It formats a `web+stellar:pay` URI entirely locally. 
+- **Customer as the Relay**: Because the QR code contains the exact destination address, amount, and asset issuer, the *customer* becomes the relayer. The customer scans the code with their internet-connected Stellar wallet (e.g., Lobstr) and submits the transaction to the ledger. The merchant never needs an internet connection to authorize the sale.
+
 ---
 
 ## Architecture Diagram
