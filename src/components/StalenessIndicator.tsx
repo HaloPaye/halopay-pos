@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Wifi, WifiOff, RefreshCw } from 'lucide-react';
-import { StalenessInfo } from '@/lib/exchange-rate';
+import { Wifi, WifiOff, RefreshCw, AlertTriangle } from 'lucide-react';
+import { StalenessInfo, getStalenessTextClass } from '@/lib/exchange-rate';
 
 interface StalenessIndicatorProps {
   rate: number;
@@ -34,7 +34,17 @@ export const StalenessIndicator: React.FC<StalenessIndicatorProps> = ({
             {source}
           </span>
         </div>
-        <span className={`text-xs mt-0.5 ${staleness.isStale ? 'text-red-500 font-medium' : 'text-gray-500'}`}>
+        <span
+          data-testid="staleness-text"
+          className={`text-xs mt-0.5 flex items-center gap-1 ${getStalenessTextClass(staleness)}`}
+        >
+          {staleness.isCritical && (
+            <AlertTriangle
+              data-testid="staleness-warning-icon"
+              aria-label="Exchange rate is over 24 hours old"
+              className="w-3.5 h-3.5 shrink-0"
+            />
+          )}
           {staleness.stalenessText}
         </span>
       </div>

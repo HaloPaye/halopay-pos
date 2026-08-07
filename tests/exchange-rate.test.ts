@@ -1,6 +1,8 @@
 import {
   calculateStaleness,
   convertFiatToCrypto,
+  getStalenessTextClass,
+  CRITICAL_STALENESS_MINUTES,
 } from '../src/lib/exchange-rate';
 import {
   generateSep7PayUri,
@@ -65,6 +67,57 @@ describe('HaloPay POS - Exchange Rate & Staleness Tests', () => {
       expect(result.stalenessText).toBe('Just now');
       expect(result.isStale).toBe(false);
       expect(result.statusLevel).toBe('fresh');
+    });
+  });
+
+  describe('calculateStaleness - 24 hour critical threshold', () => {
+    const now = 1700000000000;
+    const MINUTE = 60 * 1000;
+
+    it('should not flag a rate that is just under 24 hours old', () => {
+      const result = calculateStaleness(now - (CRITICAL_STALENESS_MINUTES - 1) * MINUTE, now);
+
+      expect(result.isCritical).toBe(false);
+      expect(result.statusLevel).toBe('stale');
+      expect(result.stalenessText).toBe('Rate updated 23 hours ago');
+    });
+
+    it('should flag a rate that is exactly 24 hours old', () => {
+      const result = calculateStaleness(now - CRITICAL_STALENESS_MINUTES * MINUTE, now);
+
+      expect(result.stalenessMinutes).toBe(1440);
+      expect(result.isCritical).toBe(true);
+      expect(result.isStale).toBe(true);
+      expect(result.statusLevel).toBe('critical');
+    });
+
+    it('should append a refresh warning to the staleness text when critical', () => {
+      const result = calculateStaleness(now - 3 * 24 * 60 * MINUTE, now);
+
+      expect(result.isCritical).toBe(true);
+      expect(result.stalenessText).toBe(
+        'Rate updated 72 hours ago - refresh before accepting payments'
+      );
+    });
+  });
+
+  describe('getStalenessTextClass', () => {
+    const now = 1700000000000;
+    const MINUTE = 60 * 1000;
+
+    it('should render fresh rates in muted gray', () => {
+      const staleness = calculateStaleness(now - 2 * MINUTE, now);
+      expect(getStalenessTextClass(staleness)).toBe('text-gray-500');
+    });
+
+    it('should render stale (but < 24h) rates in red', () => {
+      const staleness = calculateStaleness(now - 45 * MINUTE, now);
+      expect(getStalenessTextClass(staleness)).toBe('text-red-500 font-medium');
+    });
+
+    it('should render rates older than 24 hours in the orange warning state', () => {
+      const staleness = calculateStaleness(now - 25 * 60 * MINUTE, now);
+      expect(getStalenessTextClass(staleness)).toBe('text-orange-500 font-semibold');
     });
   });
 
