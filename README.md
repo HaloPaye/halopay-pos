@@ -74,7 +74,7 @@ halopay-pos/
 ├── tests/
 │   └── exchange-rate.test.ts      # Unit tests for staleness & SEP-0007 URIs
 ├── scripts/
-│   └── create_issues.ps1          # GitHub CLI issue creation script (Drips Wave format)
+│   └── create_issues.ps1          # GitHub CLI issue creation script
 ├── CONTRIBUTING.md                # Contribution guidelines & commit standards
 ├── SECURITY.md                    # Security vulnerability reporting policy
 ├── jest.config.js                 # Jest unit testing configuration
