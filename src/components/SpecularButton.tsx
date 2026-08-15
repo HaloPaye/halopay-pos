@@ -152,14 +152,28 @@ const SpecularButton = ({
   propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate, hideBaseStroke };
 
   useEffect(() => {
-    const btn = btnRef.current;
     const fx = fxRef.current;
-    if (!btn || !fx) return;
+    const btn = btnRef.current;
+    if (!fx || !btn) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
+    let renderer: Renderer;
+    try {
+      renderer = new Renderer({
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: true,
+        powerPreference: 'low-power',
+        dpr
+      });
+      if (!renderer.gl) throw new Error("No WebGL context");
+    } catch (e) {
+      console.warn("SpecularButton WebGL failed:", e);
+      return; // Graceful fallback to CSS-only button
+    }
     const gl = renderer.gl;
-    if (!gl) return; // Fallback for mobile browsers failing to create WebGL context
+
+    fx.appendChild(gl.canvas as HTMLCanvasElement);
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -271,7 +285,7 @@ const SpecularButton = ({
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
-      if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
+      if ((gl.canvas as HTMLCanvasElement).parentNode === fx) fx.removeChild(gl.canvas as HTMLCanvasElement);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, []);

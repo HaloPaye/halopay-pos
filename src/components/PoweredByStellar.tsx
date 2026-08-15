@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 import { Warp } from "@paper-design/shaders-react"
 
 interface Feature {
@@ -141,6 +141,12 @@ export default function PoweredByStellar() {
     return configs[index % configs.length]
   }
 
+  const [isDesktop, setIsDesktop] = React.useState(true)
+
+  React.useEffect(() => {
+    setIsDesktop(window.innerWidth >= 768)
+  }, [])
+
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 bg-transparent">
       <div className="max-w-7xl mx-auto">
@@ -157,21 +163,23 @@ export default function PoweredByStellar() {
             return (
               <div key={index} className="relative h-80 group">
 
-                <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-300">
-                  <Warp
-                    style={{ height: "100%", width: "100%" }}
-                    proportion={shaderConfig.proportion}
-                    softness={shaderConfig.softness}
-                    distortion={shaderConfig.distortion}
-                    swirl={shaderConfig.swirl}
-                    swirlIterations={shaderConfig.swirlIterations}
-                    shape={shaderConfig.shape}
-                    shapeScale={shaderConfig.shapeScale}
-                    scale={1}
-                    rotation={0}
-                    speed={0.8}
-                    colors={shaderConfig.colors}
-                  />
+                <div className="absolute inset-0 rounded-[2.5rem] overflow-hidden opacity-90 group-hover:opacity-100 transition-opacity duration-300 hidden md:block">
+                  {isDesktop && (
+                    <Warp
+                      style={{ height: "100%", width: "100%" }}
+                      proportion={shaderConfig.proportion}
+                      softness={shaderConfig.softness}
+                      distortion={shaderConfig.distortion}
+                      swirl={shaderConfig.swirl}
+                      swirlIterations={shaderConfig.swirlIterations}
+                      shape={shaderConfig.shape}
+                      shapeScale={shaderConfig.shapeScale}
+                      scale={1}
+                      rotation={0}
+                      speed={0.8}
+                      colors={shaderConfig.colors}
+                    />
+                  )}
                 </div>
 
                 <div className="relative z-10 p-6 md:p-8 rounded-[2.5rem] h-full flex flex-col bg-black/60 hover:bg-black/40 transition-colors duration-300 border border-white/20 shadow-xl backdrop-blur-[2px]">

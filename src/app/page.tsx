@@ -18,7 +18,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-transparent text-white font-sans selection:bg-blue-300 relative">
       <SplashOverlay />
-      <div className="fixed inset-0 z-[-2]">
+      <div className="fixed inset-0 z-[-2] hidden md:block">
         <Velaris />
       </div>
       {/* Navbar */}
@@ -64,7 +64,7 @@ export default function LandingPage() {
       />
 
       <main>
-        <section className="relative bg-transparent">
+        <section className="relative bg-transparent hidden md:block">
           <ScrollExpand
             useWindowScroll
             scrollHint="Scroll to explore"
@@ -72,10 +72,16 @@ export default function LandingPage() {
             startHeight={60}
             mediaZoom={1.0}
             overlayScrim={0}
-            childrenMedia={<AuroraBackground variant="default" className="w-full h-full bg-blue-950" />}
+            childrenMedia={
+              <div className="w-full h-full bg-blue-950">
+                <div className="hidden md:block w-full h-full">
+                  <AuroraBackground variant="default" className="w-full h-full bg-transparent" />
+                </div>
+              </div>
+            }
             title={
               <div className="flex flex-col items-center mt-[-5vh] px-4 md:px-0 text-center">
-                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4 leading-tight drop-shadow-sm">
+                 <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4 leading-tight drop-shadow-sm">
                    The standard for <br/> <span className="text-blue-200">crypto point-of-sale</span>
                  </h1>
               </div>
@@ -103,6 +109,37 @@ export default function LandingPage() {
               </div>
             </div>
           </ScrollExpand>
+        </section>
+
+        {/* Mobile Static Hero */}
+        <section className="relative w-full min-h-[100svh] flex-col items-center justify-center py-20 px-4 overflow-hidden flex md:hidden">
+          <div className="absolute inset-0 z-0 w-full h-full bg-blue-950"></div>
+          <div className="relative z-10 w-full flex flex-col items-center text-center mb-8 pt-8">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight drop-shadow-sm">
+              The standard for <br/> <span className="text-blue-200">crypto point-of-sale</span>
+            </h1>
+          </div>
+          <div className="relative z-20 w-full flex flex-col items-center text-center">
+            <p className="text-lg text-blue-50 mb-10 leading-relaxed font-medium max-w-md">
+              Accept Stellar USDC instantly. Hardware-free setup, verifiable receipts, and zero hidden fees. Built for modern merchants.
+            </p>
+            <div className="flex flex-col gap-4 w-full px-4">
+              <SpecularButton 
+                as="a"
+                href="/pos"
+                className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md" 
+              >
+                Launch POS
+              </SpecularButton>
+              <SpecularButton 
+                as="a"
+                href="https://halopay-docs.vercel.app"
+                className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md"
+              >
+                View Documentation
+              </SpecularButton>
+            </div>
+          </div>
         </section>
 
         {/* Phase 2: Core Messaging & Mechanism */}
