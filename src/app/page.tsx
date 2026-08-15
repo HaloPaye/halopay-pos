@@ -81,7 +81,7 @@ export default function LandingPage() {
             }
             title={
               <div className="flex flex-col items-center mt-[-5vh] px-4 md:px-0 text-center">
-                 <h1 className="text-[length:var(--se-title-size)] font-extrabold tracking-tight text-white mb-4 leading-tight drop-shadow-sm max-w-[90vw] md:max-w-none">
+                 <h1 className="text-[length:var(--se-title-size)] lg:text-7xl font-extrabold tracking-tight text-white mb-4 leading-tight drop-shadow-sm max-w-[90vw] md:max-w-none">
                    The standard for <br className="md:hidden" /> <span className="text-blue-200">crypto point-of-sale</span>
                  </h1>
               </div>
