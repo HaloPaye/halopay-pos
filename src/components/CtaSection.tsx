@@ -35,7 +35,7 @@ export default function CtaSection() {
                         hideBaseStroke={true}
                         className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md w-full sm:w-auto"
                       >
-                        Launch Terminal
+                        Launch POS
                       </SpecularButton>
                       <SpecularButton 
                         as="a"

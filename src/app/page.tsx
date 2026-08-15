@@ -36,7 +36,7 @@ export default function LandingPage() {
             bgColor: "rgba(255, 255, 255, 0.15)",
             textColor: "#ffffff",
             links: [
-              { label: "POS Terminal", href: "/pos", ariaLabel: "Launch POS Terminal" },
+              { label: "Launch POS", href: "/pos", ariaLabel: "Launch POS" },
               { label: "Documentation", href: "https://halopay-docs.vercel.app", ariaLabel: "View Documentation" }
             ]
           },
@@ -89,7 +89,7 @@ export default function LandingPage() {
                   href="/pos"
                   className="text-lg px-8 py-4 bg-white/10 text-white border border-white/30 hover:bg-white/20 font-bold backdrop-blur-md" 
                 >
-                  Launch Terminal
+                  Launch POS
                 </SpecularButton>
                 <SpecularButton 
                   as="a"
@@ -277,7 +277,8 @@ export default function LandingPage() {
           },
         ]}
         mainLinks={[
-          { href: "/pos", label: "Terminal" },
+          { href: "/pos", label: "Launch POS" },
+          { href: "https://github.com/HaloPaye", label: "Source" },
           { href: "#how-it-works", label: "How it works" },
           { href: "https://stellar.org", label: "Stellar" },
           { href: "https://stellar.org/use-cases/stellar-for-aid", label: "Aid Assist" },

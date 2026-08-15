@@ -224,7 +224,7 @@ const CardNav: React.FC<CardNavProps> = ({
             className="card-nav-cta-button hidden md:inline-flex border-0 rounded-xl px-5 items-center h-full font-bold cursor-pointer transition-colors duration-300 hover:opacity-90"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
           >
-            Terminal
+            Launch POS
           </a>
         </div>
 
