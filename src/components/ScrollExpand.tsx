@@ -156,15 +156,21 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
     let target = 0;
     let stageH = 0;
     let running = false;
+    let lastWidth = 0;
 
     const measure = () => {
       const c = propsRef.current;
+      const w = root.clientWidth || window.innerWidth;
+      
+      // On mobile, ignore height-only resizes (address bar collapse) to prevent jitter
+      if (w < 768 && lastWidth === w && stageH > 0) return;
+      lastWidth = w;
+
       stageH = c.useWindowScroll ? window.innerHeight : root.clientHeight;
       if (stageH <= 0) return;
       stage.style.height = `${stageH}px`;
       track.style.height = `${stageH * (1 + Math.max(0, c.scrollDistance) + Math.max(0, c.holdDistance))}px`;
 
-      const w = root.clientWidth || stageH;
       stage.style.setProperty('--se-title-size', `${clamp(w * 0.075, 20, 84)}px`);
     };
 
