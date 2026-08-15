@@ -59,6 +59,11 @@ export default function LandingPage() {
             ]
           }
         ]}
+        sectionLinks={[
+          { label: "How it Works", href: "#how-it-works" },
+          { label: "Architecture", href: "#architecture" },
+          { label: "FAQ", href: "#faq" }
+        ]}
       />
 
       <main>
@@ -228,7 +233,7 @@ export default function LandingPage() {
         </section>
 
         {/* Phase 3: Technical Integrity */}
-        <section className="pt-4 pb-24 bg-transparent">
+        <section id="architecture" className="pt-4 pb-24 bg-transparent">
           <Reveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
@@ -251,9 +256,11 @@ export default function LandingPage() {
         </Reveal>
 
         {/* Phase 3: FAQ */}
-        <Reveal direction="up" delay={0.2}>
-          <FAQ />
-        </Reveal>
+        <section id="faq" className="bg-transparent">
+          <Reveal direction="up" delay={0.2}>
+            <FAQ />
+          </Reveal>
+        </section>
 
         {/* Phase 4: Final CTA */}
         <Reveal direction="none" delay={0.2}>

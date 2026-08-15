@@ -27,6 +27,7 @@ export interface CardNavProps {
   menuColor?: string;
   buttonBgColor?: string;
   buttonTextColor?: string;
+  sectionLinks?: { label: string; href: string; }[];
 }
 
 const CardNav: React.FC<CardNavProps> = ({
@@ -38,7 +39,8 @@ const CardNav: React.FC<CardNavProps> = ({
   baseColor = '#fff',
   menuColor,
   buttonBgColor,
-  buttonTextColor
+  buttonTextColor,
+  sectionLinks
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -226,13 +228,18 @@ const CardNav: React.FC<CardNavProps> = ({
             </div>
           </div>
 
-          <a
-            href="#how-it-works"
-            className="card-nav-cta-button hidden md:inline-flex border-0 rounded-xl px-5 items-center h-full font-bold cursor-pointer transition-colors duration-300 hover:opacity-90"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
-          >
-            How it works
-          </a>
+          <div className="hidden md:flex items-center gap-3">
+            {sectionLinks?.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                className="card-nav-cta-button border border-white/20 rounded-xl px-4 py-2 items-center font-bold cursor-pointer transition-colors duration-300 hover:bg-white/20 backdrop-blur-md"
+                style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
 
         <div
