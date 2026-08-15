@@ -171,7 +171,8 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
       stage.style.height = `${stageH}px`;
       track.style.height = `${stageH * (1 + Math.max(0, c.scrollDistance) + Math.max(0, c.holdDistance))}px`;
 
-      stage.style.setProperty('--se-title-size', `${clamp(w * 0.075, 20, 84)}px`);
+      const fontSize = w < 768 ? clamp(w * 0.085, 24, 42) : clamp(w * 0.075, 40, 84);
+      stage.style.setProperty('--se-title-size', `${fontSize}px`);
     };
 
     const readProgress = () => {
