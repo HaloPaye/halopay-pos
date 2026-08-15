@@ -64,22 +64,22 @@ void main() {
 
   vec3 col = u_bg;
   
-  float dist = length(p) * 1.5;
-  float vignette = 1.0 - smoothstep(0.3, 1.2, dist);
+  float dist = length(p) * 1.2;
+  float vignette = 1.0 - smoothstep(0.5, 1.8, dist);
   
-  col = mix(col, u_colors[0], smoothstep(-0.2, 0.5, n1) * 0.85);
-  col = mix(col, u_colors[1], smoothstep(-0.1, 0.6, n2) * 0.7);
-  col = mix(col, u_colors[2], smoothstep(-0.3, 0.4, n3) * 0.6);
-  col = mix(col, u_colors[3], smoothstep(0.0, 0.7, n1 * n2) * 0.5);
+  col = mix(col, u_colors[0], smoothstep(-0.2, 0.5, n1) * 1.0);
+  col = mix(col, u_colors[1], smoothstep(-0.1, 0.6, n2) * 0.9);
+  col = mix(col, u_colors[2], smoothstep(-0.3, 0.4, n3) * 0.8);
+  col = mix(col, u_colors[3], smoothstep(0.0, 0.7, n1 * n2) * 0.8);
 
-  float glow = smoothstep(0.8, 0.0, dist) * 0.3;
+  float glow = smoothstep(0.9, 0.0, dist) * 0.4;
   col += u_colors[1] * glow;
 
   // Mix slightly to background color at edges instead of black
   col = mix(u_bg, col, vignette);
 
   float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453 + u_time);
-  col += (grain - 0.5) * u_grain * 0.1;
+  col += (grain - 0.5) * u_grain * 0.15;
 
   gl_FragColor = vec4(col, 1.0);
 }
@@ -100,7 +100,7 @@ const DEFAULT_COLORS = ["#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd"];
 export const Velaris = ({
   bg = "#2563eb",
   colors = DEFAULT_COLORS,
-  speed = 1.5,
+  speed = 2.5,
   grain = 0.05,
   height = "100vh",
   className,
