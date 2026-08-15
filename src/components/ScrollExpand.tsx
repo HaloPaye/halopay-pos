@@ -108,8 +108,13 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
 
     const e = smoothstep(0, 1, p);
 
-    const w = c.startWidth + (102 - c.startWidth) * e;
-    const h = c.startHeight + (102 - c.startHeight) * e;
+    const screenW = window.innerWidth;
+    const isSmallScreen = screenW < 1024;
+    const actualStartWidth = isSmallScreen ? Math.max(c.startWidth, 92) : c.startWidth;
+    const actualStartHeight = isSmallScreen ? Math.max(c.startHeight, 70) : c.startHeight;
+
+    const w = actualStartWidth + (102 - actualStartWidth) * e;
+    const h = actualStartHeight + (102 - actualStartHeight) * e;
     const ix = (100 - w) / 2;
     const iy = (100 - h) / 2;
     const r = c.startRadius + (c.endRadius - c.startRadius) * e;
