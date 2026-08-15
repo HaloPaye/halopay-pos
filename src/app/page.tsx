@@ -12,7 +12,6 @@ import Velaris from '@/components/ui/velaris';
 import AuroraBackground from '@/components/ui/aurora-background';
 import CardNav from '@/components/ui/CardNav';
 import { Footer } from '@/components/ui/footer';
-import GradientShimmer from '@/components/ui/gradient-shimmer';
 import ArchitectureDiagram from '@/components/ArchitectureDiagram';
 import SplashOverlay from '@/components/SplashOverlay';
 
@@ -75,10 +74,7 @@ export default function LandingPage() {
             title={
               <div className="flex flex-col items-center mt-[-5vh] px-4 md:px-0 text-center">
                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-4 leading-tight drop-shadow-sm">
-                   The standard for <br/> 
-                   <GradientShimmer gradient="sunrise" className="text-blue-200">
-                     crypto point-of-sale
-                   </GradientShimmer>
+                   The standard for <br/> <span className="text-blue-200">crypto point-of-sale</span>
                  </h1>
               </div>
             }
