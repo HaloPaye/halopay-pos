@@ -172,6 +172,7 @@ export const Velaris = ({
 
     const ro = new ResizeObserver(resize);
     ro.observe(container);
+    resize();
 
     let raf: number;
     const render = (t: number) => {
@@ -198,7 +199,7 @@ export const Velaris = ({
   return (
     <div
       ref={containerRef}
-      style={{ height }}
+      style={{ height, backgroundColor: bg }}
       className={cn("relative w-full overflow-hidden", className)}
     >
       <canvas

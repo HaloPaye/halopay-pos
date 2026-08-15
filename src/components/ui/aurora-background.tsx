@@ -82,8 +82,10 @@ export function AuroraBackground({
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
+    
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas.parentElement || canvas);
     resize();
-    window.addEventListener("resize", resize);
 
     let raf: number;
     const animate = () => {
@@ -133,7 +135,7 @@ export function AuroraBackground({
     raf = requestAnimationFrame(animate);
 
     return () => {
-      window.removeEventListener("resize", resize);
+      ro.disconnect();
       cancelAnimationFrame(raf);
     };
   }, [variant, colors, speed, blobCount]);
