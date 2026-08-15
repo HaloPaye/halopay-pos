@@ -49,17 +49,10 @@ const CardNav: React.FC<CardNavProps> = ({
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useLayoutEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
-      const totalScroll = document.documentElement.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (windowHeight > 0) {
-        setScrollProgress(totalScroll / windowHeight);
-      }
     };
     window.addEventListener('scroll', handleScroll);
     // Initial check
@@ -228,13 +221,12 @@ const CardNav: React.FC<CardNavProps> = ({
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-6 ml-auto pr-4 text-sm font-semibold">
             {sectionLinks?.map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
-                className="card-nav-cta-button border border-white/20 rounded-xl px-4 py-2 items-center font-bold cursor-pointer transition-colors duration-300 hover:bg-white/20 backdrop-blur-md"
-                style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+                className="text-white/70 hover:text-white transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -273,14 +265,6 @@ const CardNav: React.FC<CardNavProps> = ({
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Scroll Progress Slider */}
-        <div className="absolute bottom-0 left-0 h-[2px] w-full bg-white/5">
-          <div 
-            className="h-full bg-blue-500 rounded-r-full transition-all duration-150 ease-out" 
-            style={{ width: `${scrollProgress * 100}%` }}
-          />
         </div>
       </nav>
     </div>
