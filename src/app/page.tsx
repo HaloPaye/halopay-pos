@@ -27,8 +27,6 @@ export default function LandingPage() {
         logoAlt="HaloPaye Logo"
         baseColor="rgba(255, 255, 255, 0.05)"
         menuColor="#ffffff"
-        buttonBgColor="#ffffff"
-        buttonTextColor="#2563eb"
         items={[
           {
             label: "Product",
