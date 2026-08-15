@@ -215,7 +215,7 @@ const CardNav: React.FC<CardNavProps> = ({
 
           <div className="logo-container flex items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-none">
             {/* Added filter for logo since we want it inverted/white */}
-            <a href="#" className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+            <a href="#" className="flex items-center gap-2 cursor-pointer">
               <img src={logo} alt={logoAlt} className="logo h-[28px] object-contain rounded-md" />
               <span className="text-xl font-bold tracking-tight text-white">HaloPaye</span>
             </a>
