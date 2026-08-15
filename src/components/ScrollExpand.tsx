@@ -108,10 +108,10 @@ const ScrollExpand: React.FC<ScrollExpandProps> = ({
 
     const e = smoothstep(0, 1, p);
 
-    const w = c.startWidth + (100 - c.startWidth) * e;
-    const h = c.startHeight + (100 - c.startHeight) * e;
-    const ix = Math.max(0, (100 - w) / 2);
-    const iy = Math.max(0, (100 - h) / 2);
+    const w = c.startWidth + (102 - c.startWidth) * e;
+    const h = c.startHeight + (102 - c.startHeight) * e;
+    const ix = (100 - w) / 2;
+    const iy = (100 - h) / 2;
     const r = c.startRadius + (c.endRadius - c.startRadius) * e;
     
     if (holeRef.current) {
