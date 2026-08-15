@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Rocket, Smartphone, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Rocket, Smartphone, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 import SpecularButton from './SpecularButton';
 
 export default function CtaSection() {

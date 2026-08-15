@@ -1,6 +1,6 @@
-import Link from 'next/link';
+
 import React from 'react';
-import { ArrowRight, Globe2, ShieldCheck, Smartphone, WifiOff, FileCheck, Landmark, HelpCircle, Rocket, Github, Twitter } from 'lucide-react';
+import { ShieldCheck, Smartphone, WifiOff, FileCheck, Landmark, Github, Twitter } from 'lucide-react';
 import FAQ from '@/components/FAQ';
 import CtaSection from '@/components/CtaSection';
 import ScrollStack, { ScrollStackItem } from '@/components/ScrollStack';
@@ -314,15 +314,6 @@ function ProcessStep({ num, title, desc, icon }: { num: string, title: string, d
       </div>
       <h3 className="font-extrabold text-white mb-3 md:mb-4 text-2xl md:text-3xl">{title}</h3>
       <p className="text-base md:text-lg text-blue-50 leading-relaxed max-w-2xl">{desc}</p>
-    </div>
-  );
-}
-
-function FaqItem({ q, a }: { q: string, a: string }) {
-  return (
-    <div className="pb-6 border-b border-gray-200 last:border-0">
-      <h4 className="text-lg font-bold text-gray-900 mb-2">{q}</h4>
-      <p className="text-gray-600 leading-relaxed">{a}</p>
     </div>
   );
 }

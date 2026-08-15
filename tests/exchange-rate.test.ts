@@ -4,16 +4,7 @@ import {
   getStalenessTextClass,
   CRITICAL_STALENESS_MINUTES,
 } from '../src/lib/exchange-rate';
-import {
-  generateSep7PayUri,
-  parseSep7Uri,
-  validateStellarPublicKey,
-} from '../src/lib/qr-generator';
-
 describe('HaloPay POS - Exchange Rate & Staleness Tests', () => {
-  const MOCK_PUBLIC_KEY = 'GBBD47IF6LWK2P7MDEVSCWR7DPUWV3NY3DTQEVFL4TW4523WA6WELD5J';
-  const MOCK_ISSUER = 'GBBD47IF6LWK2P7MDEVSCWR7DPUWV3NY3DTQEVFL4TW4523WA6WELD5J';
-
   describe('calculateStaleness', () => {
     it('should classify fresh rates (< 5 mins) correctly', () => {
       const now = 1700000000000;

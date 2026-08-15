@@ -76,10 +76,6 @@ export default function POSPage() {
     setAmountStr((prev) => (prev.length <= 1 ? '0' : prev.slice(0, -1)));
   };
 
-  const handleQuickAdd = (addVal: number) => {
-    const current = parseFloat(amountStr) || 0;
-    setAmountStr((current + addVal).toString());
-  };
 
   const numericAmount = parseFloat(amountStr) || 0;
   const currentRate = rateResult?.rate || 1;

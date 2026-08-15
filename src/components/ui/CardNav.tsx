@@ -25,8 +25,7 @@ export interface CardNavProps {
   ease?: string;
   baseColor?: string;
   menuColor?: string;
-  buttonBgColor?: string;
-  buttonTextColor?: string;
+
   sectionLinks?: { label: string; href: string; }[];
 }
 
@@ -38,8 +37,7 @@ const CardNav: React.FC<CardNavProps> = ({
   ease = 'power3.out',
   baseColor = '#fff',
   menuColor,
-  buttonBgColor,
-  buttonTextColor,
+
   sectionLinks
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
