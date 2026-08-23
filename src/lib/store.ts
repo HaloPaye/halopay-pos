@@ -9,11 +9,11 @@ interface POSState {
   setExchangeRate: (rate: number) => void;
 }
 
-export const usePOSStore = create<POSState>((set) => ({
+export const usePOSStore = create<POSState>()((set) => ({
   merchantKey: null,
-  setMerchantKey: (key) => set({ merchantKey: key }),
+  setMerchantKey: (key: string) => set({ merchantKey: key }),
   isOfflineMode: false,
-  setOfflineMode: (status) => set({ isOfflineMode: status }),
+  setOfflineMode: (status: boolean) => set({ isOfflineMode: status }),
   exchangeRate: null,
-  setExchangeRate: (rate) => set({ exchangeRate: rate }),
+  setExchangeRate: (rate: number) => set({ exchangeRate: rate }),
 }));
