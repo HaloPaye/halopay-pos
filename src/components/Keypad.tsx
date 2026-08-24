@@ -1,89 +1,55 @@
-'use client';
-
-import React from 'react';
-import { Delete } from 'lucide-react';
-
+import React, { useState } from 'react';
 
 interface KeypadProps {
-  onKeyPress: (key: string) => void;
-  onClear: () => void;
-  onBackspace: () => void;
-  onCharge: () => void;
-  disabled?: boolean;
-  canCharge?: boolean;
+  onInput: (value: string) => void;
+  onGenerateQR: () => void;
 }
 
-export const Keypad: React.FC<KeypadProps> = ({
-  onKeyPress,
-  onClear,
-  onBackspace,
-  onCharge,
-  disabled = false,
-  canCharge = true,
-}) => {
-  const triggerHaptic = () => {
-    if (typeof window !== 'undefined' && 'vibrate' in navigator) {
-      try { navigator.vibrate(10); } catch { /* ignore */ }
+export function Keypad({ onInput, onGenerateQR }: KeypadProps) {
+  const [isDebouncing, setIsDebouncing] = useState(false);
+
+  const handleGenerateClick = () => {
+    if (isDebouncing) return;
+    
+    // Simulate haptic feedback on Android devices
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      navigator.vibrate(50);
     }
+    
+    setIsDebouncing(true);
+    onGenerateQR();
+    
+    // 500ms debounce to prevent rapid double-taps causing rendering stutters
+    setTimeout(() => {
+      setIsDebouncing(false);
+    }, 500);
   };
 
-  const keys = [
-    ['1', '2', '3'],
-    ['4', '5', '6'],
-    ['7', '8', '9'],
-    ['.', '0', 'clear'],
-  ];
-
   return (
-    <div className="w-full max-w-sm mx-auto flex flex-col gap-2">
-      {/* Numpad */}
-      <div className="grid grid-cols-3 gap-2">
-        {keys.flat().map((keyVal) => {
-          if (keyVal === 'clear') {
-            return (
-              <button
-                key={keyVal}
-                disabled={disabled}
-                onClick={() => { triggerHaptic(); onClear(); }}
-                className="h-20 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-500 font-medium text-lg transition-colors flex items-center justify-center active:bg-gray-100"
-              >
-                Clear
-              </button>
-            );
-          }
-          return (
-            <button
-              key={keyVal}
-              disabled={disabled}
-              onClick={() => { triggerHaptic(); onKeyPress(keyVal); }}
-              className="h-20 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-900 font-semibold text-3xl transition-colors flex items-center justify-center active:bg-gray-100"
-            >
-              {keyVal}
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="flex gap-2">
+    <div className="grid grid-cols-3 gap-4 w-full max-w-sm mx-auto p-4 bg-slate-900 rounded-2xl shadow-xl">
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, '.', 0, 'C'].map((key) => (
         <button
-          disabled={disabled}
-          onClick={() => { triggerHaptic(); onBackspace(); }}
-          className="h-20 w-[30%] shrink-0 rounded-2xl bg-white border border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-gray-50 text-gray-600 flex items-center justify-center transition-colors active:bg-gray-100"
+          key={key}
+          onClick={() => onInput(key.toString())}
+          className="h-20 text-3xl font-bold text-slate-100 bg-slate-800 rounded-xl active:bg-emerald-500 active:text-slate-950 transition-colors focus:outline-none focus:ring-4 focus:ring-emerald-500/50 flex items-center justify-center touch-manipulation"
+          aria-label={`Keypad button ${key}`}
         >
-          <Delete className="w-7 h-7" />
+          {key}
         </button>
+      ))}
+      <div className="col-span-3 mt-4">
         <button
-          disabled={disabled || !canCharge}
-          onClick={() => { triggerHaptic(); onCharge(); }}
-          className={`h-20 flex-1 rounded-2xl text-2xl font-bold transition-all shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] ${
-            disabled || !canCharge 
-              ? 'bg-blue-600/50 text-white/50 shadow-none'
-              : 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800'
+          onClick={handleGenerateClick}
+          disabled={isDebouncing}
+          className={`w-full h-16 text-xl font-bold rounded-xl transition-all flex items-center justify-center ${
+            isDebouncing 
+              ? 'bg-slate-700 text-slate-400 cursor-not-allowed' 
+              : 'bg-emerald-500 text-slate-950 hover:bg-emerald-400 active:scale-95 shadow-lg shadow-emerald-500/20'
           }`}
         >
-          Charge
+          {isDebouncing ? 'Generating...' : 'Generate QR'}
         </button>
       </div>
     </div>
   );
-};
+}
