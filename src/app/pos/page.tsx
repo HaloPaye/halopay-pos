@@ -190,11 +190,14 @@ export default function POSPage() {
         </div>
 
         <Keypad
-          onKeyPress={handleKeyPress}
-          onClear={handleClear}
-          onBackspace={handleBackspace}
-          onCharge={handleCharge}
-          canCharge={numericAmount > 0}
+          onInput={(key) => {
+            if (key === 'C') {
+              handleClear();
+            } else {
+              handleKeyPress(key);
+            }
+          }}
+          onGenerateQR={handleCharge}
         />
       </main>
 
