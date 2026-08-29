@@ -28,22 +28,27 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
 
     const connect = () => {
       try {
+        console.log(`[Telemetry] Attempting WS connection to ${wsUrl}`);
         const ws = new WebSocket(wsUrl);
         wsRef.current = ws;
         ws.onopen = () => {
           if (!isMounted) return;
+          console.info('[Telemetry] WS connection established. Subscribing.');
           ws.send(JSON.stringify({ type: 'subscribe', address: publicKey }));
         };
 
-        ws.onmessage = (event) => {
+        ws.onmessage = (event: MessageEvent) => {
           if (!isMounted) return;
           try {
-            const data = JSON.parse(event.data);
+            const data = JSON.parse(event.data as string) as Record<string, any>;
             if (data.type === 'payment_confirmed' || data.event === 'payment_received') {
-              const memo = data.memo || data.paymentMemo;
-              const txHash = data.txHash || data.transaction_hash || 'tx_' + Date.now().toString(36);
+              const memo = String(data.memo || data.paymentMemo || '');
+              const txHash = String(data.txHash || data.transaction_hash || 'tx_' + Date.now().toString(36));
+              
+              console.info(`[Telemetry] Payment confirmed via WS. Hash: ${txHash}`);
+              
               if (activeTransaction && activeTransaction.memo === memo) {
-                if ('vibrate' in navigator) {
+                if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
                   try { navigator.vibrate([100, 50, 100, 50, 200]); } catch { /* ignore */ }
                 }
                 setConfirmedTx({ tx: activeTransaction, txHash });
@@ -51,16 +56,21 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
               }
             }
           } catch (e) {
-            console.error(e);
+            console.error('[Telemetry] Failed to parse WS message:', e);
           }
         };
 
-        ws.onclose = () => {
+        ws.onclose = (event: CloseEvent) => {
           if (!isMounted) return;
+          console.warn(`[Telemetry] WS connection closed. Code: ${event.code}. Reconnecting in 4s...`);
           reconnectTimer = setTimeout(connect, 4000);
         };
-      } catch {
-        /* ignore */
+        
+        ws.onerror = (event: Event) => {
+          console.error('[Telemetry] WS error encountered:', event);
+        };
+      } catch (error) {
+        console.error('[Telemetry] Critical WS initialization error:', error);
       }
     };
     connect();
