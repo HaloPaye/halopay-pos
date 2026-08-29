@@ -57,7 +57,8 @@ export const getMerchantConfig = (): MerchantConfig => {
     const raw = localStorage.getItem(STORAGE_KEYS.MERCHANT_CONFIG);
     if (!raw) return DEFAULT_CONFIG;
     return { ...DEFAULT_CONFIG, ...JSON.parse(raw) };
-  } catch {
+  } catch (error) {
+    console.error('[StorageTelemetry] Failed to parse merchant config:', error);
     return DEFAULT_CONFIG;
   }
 };
@@ -69,7 +70,7 @@ export const saveMerchantConfig = (config: Partial<MerchantConfig>): MerchantCon
     try {
       localStorage.setItem(STORAGE_KEYS.MERCHANT_CONFIG, JSON.stringify(updated));
     } catch (e) {
-      console.error('Failed to save merchant config to localStorage:', e);
+      console.error('[StorageTelemetry] Failed to save merchant config to localStorage:', e);
     }
   }
   return updated;
@@ -89,7 +90,8 @@ export const getCachedRateData = (currency: string): CachedRateData | null => {
     if (!raw) return null;
     const allRates: Record<string, CachedRateData> = JSON.parse(raw);
     return allRates[currency] || null;
-  } catch {
+  } catch (error) {
+    console.error('[StorageTelemetry] Failed to parse cached rates:', error);
     return null;
   }
 };
@@ -102,7 +104,7 @@ export const saveCachedRateData = (data: CachedRateData): void => {
     allRates[data.currency] = data;
     localStorage.setItem(STORAGE_KEYS.EXCHANGE_RATES, JSON.stringify(allRates));
   } catch (e) {
-    console.error('Failed to save cached rate data:', e);
+    console.error('[StorageTelemetry] Failed to save cached rate data:', e);
   }
 };
 
@@ -111,7 +113,8 @@ export const getTransactionHistory = (): TransactionRecord[] => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.TRANSACTIONS);
     return raw ? JSON.parse(raw) : [];
-  } catch {
+  } catch (error) {
+    console.error('[StorageTelemetry] Failed to parse transaction history:', error);
     return [];
   }
 };
@@ -123,6 +126,6 @@ export const saveTransaction = (tx: TransactionRecord): void => {
     const updated = [tx, ...history.filter(item => item.id !== tx.id)].slice(0, 50); // Keep last 50
     localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, JSON.stringify(updated));
   } catch (e) {
-    console.error('Failed to save transaction record:', e);
+    console.error('[StorageTelemetry] Failed to save transaction record:', e);
   }
 };
