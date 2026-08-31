@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { CheckCircle, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { TransactionRecord } from '@/lib/storage';
-
+import { SuccessAnimation } from './SuccessAnimation';
 interface PaymentNotificationProps {
   wsUrl: string;
   publicKey: string;
@@ -88,8 +88,8 @@ export const PaymentNotification: React.FC<PaymentNotificationProps> = ({
     <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm animate-slide-up">
       <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-xl flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-green-100 text-green-600">
-            <CheckCircle className="w-6 h-6" />
+          <div className="p-2 rounded-full bg-green-100 text-green-600 flex items-center justify-center w-10 h-10">
+            <SuccessAnimation size={24} />
           </div>
           <div>
             <h4 className="font-bold text-gray-900 text-sm">Payment Received</h4>
