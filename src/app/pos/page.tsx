@@ -21,6 +21,8 @@ import { StalenessIndicator } from '@/components/StalenessIndicator';
 import { PaymentQRModal } from '@/components/PaymentQRModal';
 import { PaymentNotification } from '@/components/PaymentNotification';
 import { MerchantConfigModal } from '@/components/MerchantConfigModal';
+import { OfflineBanner } from '@/components/OfflineBanner';
+import { enqueueTransaction, getQueuedTransactions } from '@/lib/queue';
 
 export default function POSPage() {
   const [config, setConfig] = useState<MerchantConfig | null>(null);
@@ -35,12 +37,22 @@ export default function POSPage() {
   const [activeTx, setActiveTx] = useState<TransactionRecord | null>(null);
   const [activeSep7Uri, setActiveSep7Uri] = useState<string>('');
   const [history, setHistory] = useState<TransactionRecord[]>([]);
+  const [queuedCount, setQueuedCount] = useState<number>(0);
+
+  const refreshQueue = async () => {
+    const q = await getQueuedTransactions();
+    setQueuedCount(q.length);
+  };
 
   useEffect(() => {
     const loadedConfig = getMerchantConfig();
     setConfig(loadedConfig);
     setHistory(getTransactionHistory());
     setRateResult(getCurrentRate(loadedConfig.currency));
+    refreshQueue();
+    
+    const interval = setInterval(refreshQueue, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -81,7 +93,7 @@ export default function POSPage() {
   const currentRate = rateResult?.rate || 1;
   const cryptoAmount = convertFiatToCrypto(numericAmount, currentRate);
 
-  const handleCharge = () => {
+  const handleCharge = async () => {
     if (!config || numericAmount <= 0) return;
     const memo = generatePaymentMemo();
     const newTx: TransactionRecord = {
@@ -109,6 +121,21 @@ export default function POSPage() {
     saveTransaction(newTx);
     setHistory(getTransactionHistory());
     setIsQRModalOpen(true);
+
+    try {
+      const res = await fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newTx),
+      });
+      if (!res.ok && res.status !== 404) {
+        throw new Error('Failed to post transaction');
+      }
+    } catch (err) {
+      console.warn('Network offline, queuing transaction:', err);
+      await enqueueTransaction(newTx);
+      refreshQueue();
+    }
   };
 
   const handlePaymentConfirmed = useCallback(
@@ -175,6 +202,13 @@ export default function POSPage() {
         onRefresh={handleRefreshRate}
         isRefreshing={isRefreshingRate}
       />
+
+      {queuedCount > 0 && (
+        <div className="bg-yellow-100 text-yellow-800 text-sm font-semibold p-3 rounded-lg flex items-center justify-between border border-yellow-200">
+          <span>{queuedCount} offline transaction{queuedCount > 1 ? 's' : ''} queued</span>
+          <span className="text-xs opacity-75">Syncing when online...</span>
+        </div>
+      )}
 
       {/* Amount Entry Area */}
       <main className="flex-1 flex flex-col justify-center space-y-8 mt-4">
