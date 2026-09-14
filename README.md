@@ -6,11 +6,22 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/HaloPaye/halopay-pos/actions"><img alt="CI/CD" src="https://img.shields.io/badge/build-passing-brightgreen"></a>
-  <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg">
-  <img alt="SEP-0007" src="https://img.shields.io/badge/Standard-SEP--0007-cyan.svg">
-  <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-black">
+  <a href="https://stellar.org"><img alt="Stellar Ecosystem" src="https://img.shields.io/badge/Stellar-Ecosystem-000000?style=flat-square&logo=stellar&logoColor=white"></a>
+  <a href="https://stellar.org/developers"><img alt="SEP-0007 Standard" src="https://img.shields.io/badge/Standard-SEP--0007-cyan.svg?style=flat-square&logo=stellar"></a>
+  <a href="https://github.com/HaloPaye/halopay-pos/actions"><img alt="CI Status" src="https://img.shields.io/github/actions/workflow/status/HaloPaye/halopay-pos/ci.yml?branch=main&style=flat-square&label=CI"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square"></a>
+  <img alt="Next.js 14" src="https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js">
 </p>
+
+---
+
+## 🌌 Stellar & Soroban Architecture Integration
+
+HaloPay Merchant POS brings the speed, low cost, and interoperability of the Stellar network to physical retail merchants in offline-challenging environments:
+
+* **SEP-0007 URI Protocol:** Deterministically constructs `web+stellar:pay` QR payment requests compliant with SEP-0007, specifying destination accounts, payment amounts, and USDC asset trustlines.
+* **Non-Custodial Customer-As-Relayer Model:** Because payment requests are encoded into SEP-0007 QR codes, customers with cellular connectivity scan the terminal screen with their personal Stellar wallets (Lobstr, Vibrant, etc.) and submit the transaction directly to Stellar Horizon. The merchant POS never requires secret key custody or active data connectivity to complete a sale.
+* **Real-Time Horizon & Soroban Confirmation:** For merchants with intermittent or newly restored connectivity, the terminal connects to the settlement backend over WebSockets to receive instant payment finality confirmations streamed directly from Stellar Horizon ledger events.
 
 ---
 
