@@ -1,70 +1,78 @@
 # Contributing to HaloPay Merchant POS
 
-Thank you for your interest in contributing to HaloPay POS! We welcome contributions from developers of all skill levels.
+Thank you for your interest in contributing to **HaloPay Merchant POS**! This repository provides an offline-first Progressive Web Application (PWA) that allows merchants in emerging markets and crisis zones to accept digital payments over the Stellar network without requiring constant cellular connectivity.
+
+To maintain architectural integrity, code quality, and smooth collaboration, please adhere to our contribution guidelines below.
 
 ---
 
-## Code of Conduct
+## 🚀 How to Contribute
 
-Please maintain a respectful, inclusive, and professional environment across all issue discussions, pull requests, and code reviews.
+### 1. Select an Open Issue
+* Browse issues labeled `status: ready-for-dev`, `good first issue`, or `help wanted`.
+* Review the issue's **Background & Context**, **Technical Requirements**, and **Acceptance Criteria**.
+
+### 2. Request Assignment Before Starting Work
+* **Please do not begin coding or submit unsolicited PRs without being assigned to an issue.** This prevents multiple contributors from duplicating effort on the same feature or bug.
+* Comment on the issue detailing your proposed technical approach. A maintainer will triage and assign the issue to you.
+
+### 3. Branching Strategy
+* Create your feature branch off `main`:
+  ```bash
+  git checkout -b feat/issue-<issue_number>-<short-description>
+  ```
+  *Examples:*
+  * `feat/issue-19-qr-camera-scanner`
+  * `fix/issue-28-localstorage-ssr-hydration`
+  * `test/issue-34-staleness-edge-cases`
+
+### 4. Pull Request Standards
+* **Title Format:** PR titles MUST reference the issue number:
+  ```text
+  [#<issue_number>] <Imperative description of changes>
+  ```
+  *Example:* `[#19] Implement QR code camera scanner component for merchant payments`
+* **Issue Linking:** In your PR description, explicitly link the issue:
+  ```text
+  Closes #<issue_number>
+  ```
+* **Atomicity:** Keep each PR focused strictly on the assigned issue. Avoid mixing unrelated UI adjustments or refactors.
 
 ---
 
-## Branching Strategy & Workflow
+## 🛠️ Local Development & Quality Gates
 
-1. Fork the repository and clone your fork locally.
-2. Create a feature branch off `main`:
-   ```bash
-   git checkout -b feat/your-feature-name
-   ```
-3. Run local unit tests and lint checks before committing:
-   ```bash
-   npm test
-   npm run lint
-   ```
-4. Commit your changes using **Conventional Commits** format (see specification below).
-5. Push to your fork and submit a Pull Request to `main`.
+All pull requests trigger our continuous integration (CI) workflow. Before submitting a PR, ensure all checks pass locally:
 
----
-
-## Pull Request Rules
-
-* All PRs must target the `main` branch.
-* Ensure CI checks (linting, typescript compilation, and tests) pass before requesting a review.
-* Include a descriptive title and reference any related issues (e.g., `Fixes #123`).
-* Keep PRs focused on a single feature or bug fix to expedite the review process.
-
----
-
-## Conventional Commits Specification
-
-All commit messages MUST adhere to the [Conventional Commits](https://www.conventionalcommits.org/) format:
-
+### 1. Code Quality & Linting
+```bash
+npm run lint
 ```
-<type>(<scope>): <short description>
+
+### 2. TypeScript Typechecking & Build
+```bash
+npm run build
 ```
 
-### Allowed Types
-
-* `feat`: A new feature added to the POS terminal
-* `fix`: A bug fix
-* `test`: Adding or refactoring unit tests
-* `docs`: Documentation updates
-* `style`: Styling or layout adjustments without logic changes
-* `refactor`: Code restructuring without breaking existing functionality
-* `chore`: Build process, dependencies, or maintenance tasks
-
-### Examples
-
-* `feat(pos): add offline SEP-0007 QR code generator`
-* `test(pos): add unit tests for cached rate staleness logic`
-* `docs(pos): update README with PWA installation guide`
-* `fix(pos): resolve localStorage fallback on SSR render`
+### 3. Running Unit Tests
+```bash
+npm test
+```
 
 ---
 
-## Testing Guidelines
+## 🏛️ Repository Architecture
 
-* Unit tests reside in the `tests/` directory.
-* Run tests with `npm test`.
-* Ensure new features include corresponding Jest test coverage.
+* `src/app/`: Next.js 14 App Router layout, pages, and global styling.
+* `src/components/`: Modular React components (keypad, QR generator, network monitor, staleness banners).
+* `src/lib/`: Core domain logic (SEP-0007 URI formatting, rate calculation, localStorage wrappers).
+* `public/`: Service worker (`sw.js`) and PWA manifest (`manifest.json`) for offline caching.
+* `tests/`: Jest and React Testing Library suites validating UI components and offline logic.
+
+---
+
+## 📜 Code of Conduct & Licensing
+
+* **Respect & Professionalism:** Treat all community members, reviewers, and maintainers with courtesy.
+* **Licensing:** All contributions to this repository are licensed under the **MIT License**. By submitting a pull request, you agree that your work will be licensed under these terms.
+
