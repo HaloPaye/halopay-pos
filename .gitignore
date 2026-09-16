@@ -32,3 +32,16 @@ next-env.d.ts
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# temp and internal artifacts
+.impeccable/
+.tmp*
+*.backup
+*.patch
+*.cmd
+*.sh
+protection.json
+extract_*.js
+get_first_page.js
+cta_snippet.txt
+Gemini_Generated_*
